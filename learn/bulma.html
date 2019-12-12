@@ -13,10 +13,17 @@
         nav.navbar {
             font-size: 1.4rem !important;
         }
+
+        .custom_box {
+
+            background-color: aqua;
+            text-align: center;
+
+        }
     </style>
 </head>
 
-<body onload="hideAll()">
+<body onload="ready()">
 
     <!-- Nav bar start -->
 
@@ -172,7 +179,59 @@
         </div>
 
         <div class="container tabcontent" id="id_section_team">
-            <div class="columns">
+            <section class="section" id="create_join_section">
+                <div class="columns is-centered">
+                    <div class="column custom_box is-two-fifths">
+                        <div class="field">
+                            <label class="label">Enter Team Name</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input is-danger" type="text" placeholder="Enter Team Name">
+                                <!-- OR is-success -->
+                                </span>
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                                <span class="icon is-small is-right">
+                                    <i class="fas fa-check"></i> <!-- OR fa-exclamation-triangle-->
+                                </span>
+                            </div>
+                            <p class="help is-success">This username is available</p> <!-- OR is-danger -->
+                        </div>
+                        <div class="field">
+                            <label class="label">Group Code</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Text input">
+                            </div>
+                        </div>
+                        <button class="button is-primary">Generate Team Join Code</button>
+                    </div>
+
+                    <div class="column is-1" style="text-align: center">
+                        OR
+                    </div>
+
+                    <div class="column custom_box is-two-fifths">
+                        <div class="field">
+                            <label class="label">Join Team</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input is-danger" type="text" placeholder="Enter Team Name">
+                                <!-- OR is-success -->
+                                </span>
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                                <span class="icon is-small is-right">
+                                    <i class="fas fa-check"></i> <!-- OR fa-exclamation-triangle-->
+                                </span>
+                            </div>
+                            <p class="help is-success">This username is available</p> <!-- OR is-danger -->
+                        </div>
+                        <button class="button is-primary">Join Me!</button>
+                    </div>
+
+                </div>
+            </section>
+            <div class="columns" id="team_members_list_section">
                 <div class="column">
                     <section class="hero">
                         <div class="hero-body">
@@ -181,7 +240,7 @@
                                     Simplifiers!!
                                 </h1>
                                 <h2 class="subtitle">
-                                    GROUP ID - MOTHER FUCKERS Gandare
+                                    GROUP ID 
                                 </h2>
                             </div>
                         </div>
@@ -283,11 +342,11 @@
                         </article>
                     </div>
                 </div>
-
-            </div>
-            <center>
+                <center>
                     <button class="button is-danger">Delete Group</button>
                 </center>
+            </div>
+
         </div>
 
         <div class="container tabcontent" id="id_section_problem_stmts">
