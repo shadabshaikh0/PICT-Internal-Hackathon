@@ -16,6 +16,12 @@ exports.login = (req, res) => {
 
 exports.signup = (req, res) => {
   res.render('signup', {
-    title: 'signup'
+    title: 'Signup'
+  });
+};
+
+exports.profile = (req, res) => {
+  res.render('dashboard', {
+    title: 'Dashboard'
   });
 };
