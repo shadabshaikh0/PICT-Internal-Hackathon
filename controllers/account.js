@@ -2,6 +2,10 @@ const constants = require('../constants.js')
 const jwt = require('jsonwebtoken')
 const User = require('../models/User.js')
 
+const bcrypt = require('bcrypt');
+const crypto = require('crypto');
+
+
 let profilePage = function (req, res) {
 	console.log('profilePage')
 	res.render('dashboard', {
@@ -17,6 +21,8 @@ let loginPage = function (req, res) {
 }
 
 let validateLogin = function (req, res) {
+	console.log(req.body);
+	
 	// Suppose Login credential is OK
 	credentials_ok = true;
 	const jwtExpirySeconds = constants.JWT_EXPIRY_SECONDS;
@@ -43,27 +49,27 @@ let validateLogin = function (req, res) {
 	}
 }
 
-let signUpPage =  function (req, res) {
+let signUpPage = function (req, res) {
 	res.render('signup', {
 		title: 'Signup'
 	});
 }
 
-let signUpUser = function(req, res) { 
+let signUpUser = function (req, res) {
 	const new_user = new User(req.body)
 	new_user.save()
-	.then(() => {
-		console.log('done')
-		return res.redirect('/account/login')
-	})
+		.then(() => {
+			console.log('done')
+			return res.redirect('/account/login')
+		})
 
-	
+
 }
 
 module.exports = {
 	loginPage: loginPage,
 	validateLogin: validateLogin,
 	profilePage: profilePage,
-	signUpPage : signUpPage,
-	signUpUser : signUpUser
+	signUpPage: signUpPage,
+	signUpUser: signUpUser
 }
