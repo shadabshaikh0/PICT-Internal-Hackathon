@@ -5,15 +5,21 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello Bulma!</title>
+    <title>Internal Hackathon</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <script src="bulma.js"></script>
+
+    <script src="js/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/landing.css">
     <style>
         nav.navbar {
+            background-color: #4A148C;
             font-size: 1.4rem !important;
         }
-
+        .mybutton, .mybutton:hover{
+            background-color: #4A148C;
+            color: white;
+        }
         .custom_box {
             background-color: white;
             text-align: center;
@@ -25,43 +31,47 @@
 
     <!-- Nav bar start -->
 
-    <nav class="navbar is-4" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="https://bulma.io">
-                <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-            </a>
-
-            <a role="button" class="navbar-burger burger"
-                onclick="document.querySelector('.navbar-menu').classList.toggle('is-active');" aria-label="menu"
-                aria-expanded="false" data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
-        </div>
-
-        <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-start">
-                <a class="navbar-item">
-                    Rules
-                </a>
-                <a class="navbar-item">
-                    FAQ
-                </a>
-            </div>
-
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="buttons">
-                        <a class="button is-primary">
-                            <strong>Sign out</strong>
-                        </a>
+    <nav class="navbar">
+            <div class="container">
+                <div class="navbar-brand">
+                    <span class="navbar-burger burger"
+                        onclick="document.querySelector('.navbar-menu').classList.toggle('is-active');"
+                        data-target="navbarMenu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </div>
+                <div id="navbarMenu" class="navbar-menu">
+                    <div class="navbar-end">
+    
+                        <span class="navbar-item">
+                            <a class="butt button" href="#">
+                                <span class="icon">
+                                    <i class="fa fa-book"></i>
+                                </span>
+                                <span>Rules</span>
+                            </a>
+                        </span>
+                        <span class="navbar-item">
+                            <a class="butt button" href="#">
+                                <span class="icon">
+                                    <i class="fa fa-superpowers"></i>
+                                </span>
+                                <span>FAQ</span>
+                            </a>
+                        </span>
+                        <span class=" navbar-item">
+                            <a class="butt button " href="index.html">
+                                <span class="butt">Sign Out</span>
+                            </a>
+                        </span>
+    
                     </div>
                 </div>
             </div>
-        </div>
-    </nav>
-
+        </nav>
+    
     <!-- Nav bar end -->
 
     <!-- Tab start -->
@@ -101,24 +111,18 @@
     <section class="section">
         <div class="container tabcontent" id="id_section_profile">
             <div class="columns">
-                <div class="column is-one-third">
+                <div class="column is-one-quarter">
                     <figure class="image is-square">
                         <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
                     </figure>
                 </div>
                 <div class="column">
-                    <section class="hero">
-                        <div class="hero-body">
-                            <div class="container">
-                                <h1 class="title">
-                                    Shadab Shaikh
-                                </h1>
-                                <h2 class="subtitle">
-                                    C2K178987
-                                </h2>
-                            </div>
-                        </div>
-                    </section>
+                    <h1 class="title">
+                        Shadab Shaikh
+                    </h1>
+                    <h2 class="subtitle">
+                        C2K178987
+                    </h2>
                     <div class="box">
                         <article class="media">
                             <div class="media-left">
@@ -171,7 +175,7 @@
 
             </div>
             <center>
-                <button class="button is-info">Update Profile</button>
+                <button class="button mybutton ">Update Profile</button>
             </center>
 
         </div>
@@ -195,9 +199,9 @@
                             </div>
                             <p class="help is-success">This username is available</p> <!-- OR is-danger -->
                         </div>
-                        <button class="button is-info">Generate Team Invite Code</button><br>
+                        <button class="button mybutton">Generate Team Invite Code</button><br>
                         <div class="field">
-                            <label class="label">Team Invite Link</label>
+                            <label class="label">Team Invite Code</label>
                             <div class="control">
                                 <input class="input" type="text" placeholder="Copy link from here">
                             </div>
@@ -210,39 +214,24 @@
 
                     <div class="column custom_box is-two-fifths">
                         <div class="field">
-                            <label class="label">Join Team</label>
-                            <div class="control has-icons-left has-icons-right">
-                                <input class="input is-danger" type="text" placeholder="Paste invite link here">
-                                <!-- OR is-success -->
-                                </span>
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-user"></i>
-                                </span>
-                                <span class="icon is-small is-right">
-                                    <i class="fas fa-check"></i> <!-- OR fa-exclamation-triangle-->
-                                </span>
+                            <label class="label">Team Invite Code</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Paste link here">
                             </div>
-                            <p class="help is-success">This username is available</p> <!-- OR is-danger -->
                         </div>
-                        <button class="button is-info">Join Team!</button>
+                        <button class="button mybutton">Join Team!</button>
                     </div>
 
                 </div>
             </section>
             <div class="columns" id="team_members_list_section">
                 <div class="column">
-                    <section class="hero">
-                        <div class="hero-body">
-                            <div class="container">
-                                <h1 class="title">
-                                    Simplifiers!!
-                                </h1>
-                                <h2 class="subtitle">
-                                    GROUP ID 
-                                </h2>
-                            </div>
-                        </div>
-                    </section>
+                    <h1 class="title">
+                        Simplifiers!!
+                    </h1>
+                    <h2 class="subtitle">
+                        GROUP ID
+                    </h2>
                     <div class="box">
                         <article class="media">
                             <div class="media-left">
