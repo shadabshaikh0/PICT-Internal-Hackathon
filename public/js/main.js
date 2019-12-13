@@ -8,7 +8,6 @@ function ready() {
     document.getElementById('team_members_list_section').style.display = "none";
     document.getElementById('create_join_section').style.display = "block";
   }
-
   hideAll();
 }
 
