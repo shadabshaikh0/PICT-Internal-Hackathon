@@ -3,7 +3,10 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-  email: { type: String, unique: true },
+  email: {
+    type: String,
+    unique: true
+  },
   password: String,
   passwordResetToken: String,
   passwordResetExpires: Date,
@@ -18,18 +21,26 @@ const userSchema = new mongoose.Schema({
     website: String,
     picture: String
   }
-}, { timestamps: true });
+}, {
+  timestamps: true
+});
 
 /**
  * Password hash middleware.
  */
 userSchema.pre('save', function save(next) {
   const user = this;
-  if (!user.isModified('password')) { return next(); }
+  if (!user.isModified('password')) {
+    return next();
+  }
   bcrypt.genSalt(10, (err, salt) => {
-    if (err) { return next(err); }
+    if (err) {
+      return next(err);
+    }
     bcrypt.hash(user.password, salt, (err, hash) => {
-      if (err) { return next(err); }
+      if (err) {
+        return next(err);
+      }
       user.password = hash;
       next();
     });

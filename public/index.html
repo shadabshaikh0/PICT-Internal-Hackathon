@@ -12,10 +12,9 @@
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css" />
     <link rel="stylesheet" type="text/css" href="./css/landing.css">
     <script>
-        
-        if(  document.cookie.indexOf('jwt_token') != -1 ){
-                window.location = '/account/profile'
-        } 
+        if (document.cookie.indexOf('jwt_token') != -1) {
+            window.location = '/account/profile'
+        }
 
         function doPost(path) {
             data = {
@@ -199,7 +198,7 @@
                     <div class="column is-two-thirds has-text-left">
                         <h1 class="title is-1">Contact Us</h1>
                         <p class="is-size-4">PICT Internal Hackathon Organizers</p>
-                       
+
                     </div>
                     <div class="column is-one-third has-text-left">
                         <div class="field">
@@ -221,7 +220,9 @@
                             </div>
                         </div>
                         <div class="control">
-                            <button type="submit" class="button is-link is-fullwidth has-text-weight-medium is-medium">Send Message</button>
+                            <button type="submit"
+                                class="button is-link is-fullwidth has-text-weight-medium is-medium">Send
+                                Message</button>
                         </div>
                     </div>
                 </div>
