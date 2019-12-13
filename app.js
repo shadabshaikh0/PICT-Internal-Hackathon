@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const chalk = require('chalk');
 const errorHandler = require('errorhandler');
 const lusca = require('lusca');
-const passport = require('passport');
 const dotenv = require('dotenv');
 const MongoStore = require('connect-mongo')(session);
 const flash = require('express-flash');
@@ -13,19 +12,13 @@ const mongoose = require('mongoose');
 const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
-const upload = multer({ dest: path.join(__dirname, 'uploads') });
-dotenv.config({ path: '.env.example' });
+const upload = multer({
+  dest: path.join(__dirname, 'uploads')
+});
+dotenv.config({
+  path: '.env.example'
+});
 
-/**
- * Controllers (route handlers).
- */
-const homeController = require('./controllers/home');
-const userController = require('./controllers/user');
-
-/**
- * API keys and Passport configuration.
- */
- const passportConfig = require('./config/passport');
 /**
  * Create Express server.
  */
@@ -60,19 +53,22 @@ app.use(sass({
   dest: path.join(__dirname, 'public')
 }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(session({
   resave: true,
   saveUninitialized: true,
   secret: process.env.SESSION_SECRET,
-  cookie: { maxAge: 1209600000 }, // two weeks in milliseconds
+  cookie: {
+    maxAge: 1209600000
+  }, // two weeks in milliseconds
   store: new MongoStore({
     url: process.env.MONGODB_URI,
     autoReconnect: true,
   })
 }));
-app.use(passport.initialize());
-app.use(passport.session());
+
 
 app.use(flash());
 // app.use((req, res, next) => {
@@ -92,20 +88,24 @@ app.use(flash());
 // });
 app.use((req, res, next) => {
   // After successful login, redirect back to the intended page
-  if (!req.user
-    && req.path !== '/login'
-    && req.path !== '/signup'
-    && !req.path.match(/^\/auth/)
-    && !req.path.match(/\./)) {
+  if (!req.user &&
+    req.path !== '/login' &&
+    req.path !== '/signup' &&
+    !req.path.match(/^\/auth/) &&
+    !req.path.match(/\./)) {
     req.session.returnTo = req.originalUrl;
-  } else if (req.user
-    && (req.path === '/account' || req.path.match(/^\/api/))) {
+  } else if (req.user &&
+    (req.path === '/account' || req.path.match(/^\/api/))) {
     req.session.returnTo = req.originalUrl;
   }
   next();
 });
-app.use('/', express.static(path.join(__dirname, '/public'), { maxAge: 31557600000 }));
-app.use('/public/js', express.static(path.join(__dirname, '/public/js/'), { maxAge: 31557600000 }));
+app.use('/', express.static(path.join(__dirname, '/public'), {
+  maxAge: 31557600000
+}));
+app.use('/public/js', express.static(path.join(__dirname, '/public/js/'), {
+  maxAge: 31557600000
+}));
 
 /**
  * Primary app routes.
@@ -115,49 +115,20 @@ var cookieParser = require('cookie-parser')
 app.use(cookieParser())
 const routes = require('./routes');
 app.use("/", routes);
-// app.get('/', homeController.index);
-// app.get('/account/login', homeController.login);
-// app.get('/account/profile', homeController.profile);
-// app.get('/account/signup', homeController.signup);
-app.post('/api/foo', (req,res)=>{
-    id = req.body.id ;    
-    res.json({ "data":"bar"})
+
+app.post('/api/foo', (req, res) => {
+  id = req.body.id;
+  res.json({
+    "data": "bar"
+  })
 })
 
 
-// app.post('/login', userController.postLogin);
-app.get('/logout', userController.logout);
-app.get('/forgot', userController.getForgot);
-app.post('/forgot', userController.postForgot);
-app.get('/reset/:token', userController.getReset);
-app.post('/reset/:token', userController.postReset);
-// app.post('/signup', userController.postSignup);
-
-app.get('/account/verify', userController.getVerifyEmail);
-app.get('/account/verify/:token', passportConfig.isAuthenticated, userController.getVerifyEmailToken);
-app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
-app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
-app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
-app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 
 
 
 
 
-/**
- * API examples routes.
- */
-// app.get('/api', apiController.getApi);
-// app.get('/api/upload', lusca({ csrf: true }), apiController.getFileUpload);
-// app.post('/api/upload', upload.single('myFile'), lusca({ csrf: true }), apiController.postFileUpload);
-
-/**
- * OAuth authentication routes. (Sign in)
- */
-
-/**
- * Error Handler.
- */
 if (process.env.NODE_ENV === 'development') {
   // only use in development
   app.use(errorHandler());

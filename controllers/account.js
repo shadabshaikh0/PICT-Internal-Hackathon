@@ -37,8 +37,7 @@ let validateLogin = function (req, res) {
 			maxAge: jwtExpirySeconds * 1000
 		});
 		return res.redirect('/account/profile');
-	}
-	else{
+	} else {
 		return res.redirect('/');
 	}
 }
