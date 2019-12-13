@@ -307,7 +307,7 @@ exports.getVerifyEmail = (req, res, next) => {
       }
     });
     const mailOptions = {
-      to: req.user.email,
+      to: req.user.email, 
       from: 'hackathon@starter.com',
       subject: 'Please verify your email address on Hackathon Starter',
       text: `Thank you for registering with hackathon-starter.\n\n
