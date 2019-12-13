@@ -17,6 +17,11 @@
             font-size: 1.4rem !important;
         }
 
+        .navbar-burger,
+        .burger {
+            color: white;
+        }
+
         .mybutton,
         .mybutton:hover {
             background-color: #4A148C;
@@ -116,14 +121,15 @@
             <div class="columns">
                 <div class="column is-one-quarter">
                     <figure class="image is-square">
-                        <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
+                        <img id="user_gravatar" class="is-rounded"
+                            src="https://bulma.io/images/placeholders/128x128.png">
                     </figure>
                 </div>
                 <div class="column">
-                    <h1 class="title">
+                    <h1 class="title" id="user_name">
                         Shadab Shaikh
                     </h1>
-                    <h2 class="subtitle">
+                    <h2 class="subtitle" id="user_regid">
                         C2K178987
                     </h2>
                     <div class="box">
@@ -136,7 +142,7 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong>johnswimt@gmail.com</strong>
+                                        <strong id="user_email">johnswimt@gmail.com</strong>
                                     </p>
                                 </div>
                             </div>
@@ -152,7 +158,7 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong>Computer Engineering, BE</strong>
+                                        <strong id="user_deptyear">Computer Engineering, BE</strong>
                                     </p>
                                 </div>
                             </div>
@@ -168,7 +174,7 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong>894375948</strong>
+                                        <strong id="user_mobile">894375948</strong>
                                     </p>
                                 </div>
                             </div>
@@ -229,12 +235,13 @@
             </section>
             <div class="columns" id="team_members_list_section">
                 <div class="column">
-                    <h1 class="title">
+                    <h1 class="title" id="teamname">
                         Simplifiers!!
                     </h1>
-                    <h2 class="subtitle">
+                    <h2 class="subtitle" id="teamid">
                         GROUP ID
                     </h2>
+
                     <div class="box">
                         <article class="media">
                             <div class="media-left">
@@ -245,7 +252,24 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong>johnswimt@gmail.com</strong>
+                                        <strong id="membername1">johnswimt@gmail.com</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-24x24">
+                                    <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <strong id="membername2">Computer Engineering, BE</strong>
                                     </p>
                                 </div>
                             </div>
@@ -261,7 +285,7 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong>Computer Engineering, BE</strong>
+                                        <strong id="membername3">894375948</strong>
                                     </p>
                                 </div>
                             </div>
@@ -277,7 +301,7 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong>894375948</strong>
+                                        <strong id="membername4" >894375948</strong>
                                     </p>
                                 </div>
                             </div>
@@ -293,7 +317,7 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong>894375948</strong>
+                                        <strong id="membername5">894375948</strong>
                                     </p>
                                 </div>
                             </div>
@@ -309,23 +333,7 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong>894375948</strong>
-                                    </p>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="box">
-                        <article class="media">
-                            <div class="media-left">
-                                <figure class="image is-24x24">
-                                    <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                <div class="content">
-                                    <p>
-                                        <strong>894375948</strong>
+                                        <strong id="membername6">894375948</strong>
                                     </p>
                                 </div>
                             </div>
