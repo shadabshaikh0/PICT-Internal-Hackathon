@@ -1,5 +1,6 @@
 const constants = require('../constants.js')
 const jwt = require('jsonwebtoken')
+const User = require('../models/User.js')
 
 let profilePage = function (req, res) {
 	console.log('profilePage')
@@ -42,8 +43,27 @@ let validateLogin = function (req, res) {
 	}
 }
 
+let signUpPage =  function (req, res) {
+	res.render('signup', {
+		title: 'Signup'
+	});
+}
+
+let signUpUser = function(req, res) { 
+	const new_user = new User(req.body)
+	new_user.save()
+	.then(() => {
+		console.log('done')
+		return res.redirect('/account/login')
+	})
+
+	
+}
+
 module.exports = {
 	loginPage: loginPage,
 	validateLogin: validateLogin,
-	profilePage: profilePage
+	profilePage: profilePage,
+	signUpPage : signUpPage,
+	signUpUser : signUpUser
 }

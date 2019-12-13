@@ -13,5 +13,10 @@ router
   .get(accountController.loginPage)
   .post(accountController.validateLogin)
 
+router
+  .route("/signup")
+  .get(accountController.signUpPage)
+  .post(accountController.signUpUser)
+
 
 module.exports = router;
