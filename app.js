@@ -110,14 +110,17 @@ app.use('/public/js', express.static(path.join(__dirname, '/public/js/'), { maxA
 /**
  * Primary app routes.
  */
-app.get('/', homeController.index);
-app.get('/login', homeController.login);
-app.get('/profile', homeController.profile);
-app.get('/signup', homeController.signup);
+
+var cookieParser = require('cookie-parser')
+app.use(cookieParser())
+const routes = require('./routes');
+app.use("/", routes);
+// app.get('/', homeController.index);
+// app.get('/account/login', homeController.login);
+// app.get('/account/profile', homeController.profile);
+// app.get('/account/signup', homeController.signup);
 app.post('/api/foo', (req,res)=>{
     id = req.body.id ;    
-
-    
     res.json({ "data":"bar"})
 })
 

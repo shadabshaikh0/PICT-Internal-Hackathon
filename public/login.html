@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login</title>
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css" />
-    <link rel="stylesheet" type="text/css" href="./css/login.css">
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
 </head>
 
 <body>
@@ -20,9 +20,9 @@
                     <p class="subtitle has-text-black">Please login to proceed.</p>
                     <div class="box">
                         <figure class="avatar">
-                            <img src="./images/login.png" height="30" width="40%">
+                            <img src="/images/login.png" height="30" width="40%">
                         </figure>
-                        <form>
+                        <form method="POST" action="/account/login">
                             <div class="field">
                                 <div class="control">
                                     <input class="input is-medium" type="email" placeholder="Your Email"
