@@ -1,3 +1,13 @@
+function delete_cookie(name) {
+  document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+function signout(){
+  console.log('Clck')
+  delete_cookie('jwt_token') ; 
+  window.location = '/' ; 
+  // comment
+}
 
 function display_dashboard( payload  ){
     // let userdata = payload.userdata;
