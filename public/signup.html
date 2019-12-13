@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login</title>
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css" />
-    <link rel="stylesheet" type="text/css" href="./css/login.css">
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
 </head>
 
 <body>
@@ -19,32 +19,43 @@
                     <hr class="login-hr">
                     <div class="box">
                         <figure class="avatar">
-                            <img src="./images/signup.png" height="30" width="40%">
+                            <img src="/images/signup.png" height="30" width="40%">
                         </figure>
-                        <form>
+                        <form method="POST" action="/account/signup">
                             <div class="field">
                                 <div class="control">
-                                    <input class="input is-medium" required type="text" placeholder="Your Name"
-                                        style="color: black;font-weight: bold" autofocus="">
+                                    <input name="name" class="input is-medium" required type="text"
+                                        placeholder="Your Name" style="color: black;font-weight: bold" autofocus="">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input class="input is-medium" required type="text"
+                                    <input name="_id" class="input is-medium" required type="text"
                                         placeholder="PICT Reg ID (C2K , I2K , E2K)"
                                         style="color: black;font-weight: bold" autofocus="">
                                 </div>
                             </div>
 
+                            <div class="control">
+                                <label class="radio"> 
+                                    <input name="gender" type="radio" value="female">
+                                    Female
+                                </label>
+                                <label class="radio">
+                                    <input name="gender" type="radio" value="male" checked>
+                                    Male
+                                </label>
+                            </div>
+
                             <div class="field">
                                 <div class="control">
-                                    <input class="input is-medium" required type="email" placeholder="Your Email"
-                                        style="color: black;font-weight: bold" autofocus="">
+                                    <input name="email" class="input is-medium" required type="email"
+                                        placeholder="Your Email" style="color: black;font-weight: bold" autofocus="">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input class="input is-medium" required type="number"
+                                    <input name="mobile" class="input is-medium" required type="number"
                                         placeholder="Your Mobile number" style="color: black;font-weight: bold"
                                         autofocus="">
                                 </div>
@@ -52,15 +63,22 @@
 
                             <div class="field">
                                 <div class="control">
-                                    <input class="input is-medium" required type="password" placeholder="Your Password"
-                                        style="color: black;font-weight: bold">
+                                    <input name="password" class="input is-medium" required type="password"
+                                        placeholder="Your Password" style="color: black;font-weight: bold">
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <div class="control">
+                                    <input name="conf_password" class="input is-medium" required type="password"
+                                        placeholder="Your Password" style="color: black;font-weight: bold">
                                 </div>
                             </div>
 
                             <div class="field">
                                 <div class="file is-centered is-medium">
                                     <label class="file-label">
-                                        <input class="file-input" type="file" name="resume" required>
+                                        <input name="collegeid" class="file-input" type="file" name="resume" required>
                                         <span class="file-cta">
                                             <span class="file-label">
                                                 Upload College ID
@@ -70,7 +88,8 @@
                                 </div>
                             </div>
 
-                            <button class="mybutton button is-block is-medium is-fullwidth"> Sign Up</button>
+                            <input type="submit" value="SUBMIT" />
+                            <!-- <button class="mybutton button is-block is-medium is-fullwidth"> Sign Up</button> -->
                         </form>
                         <div>
 

@@ -3,24 +3,20 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    unique: true
-  },
-  password: String,
-  passwordResetToken: String,
-  passwordResetExpires: Date,
-  emailVerificationToken: String,
-  emailVerified: Boolean,
-  tokens: Array,
 
-  profile: {
-    name: String,
-    gender: String,
-    location: String,
-    website: String,
-    picture: String
-  }
+  _id : {
+    type: String, 
+    unique : true
+  }, 
+  name : String,
+  email : String, 
+  mobile : String, 
+  gender : String, 
+  dept : String, 
+  year : String, 
+  gravatar_url : String, 
+  collegeid : String, 
+  password : String
 }, {
   timestamps: true
 });

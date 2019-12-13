@@ -113,6 +113,8 @@ app.use('/public/js', express.static(path.join(__dirname, '/public/js/'), {
 
 var cookieParser = require('cookie-parser')
 app.use(cookieParser())
+
+
 const routes = require('./routes');
 app.use("/", routes);
 
@@ -146,6 +148,7 @@ if (process.env.NODE_ENV === 'development') {
 //   console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env'));
 //   console.log('  Press CTRL-C to stop\n');
 // });
+
 
 app.listen(8000, () => {
   console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env'));
