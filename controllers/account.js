@@ -21,12 +21,18 @@ let loginPage = function (req, res) {
 }
 
 let validateLogin = async function (req, res) {
-	const user = await User.findOne({_id : req.body.reg_id});
-    if(! user ) return res.status(400).json({ registered : false});
+	const user = await User.findOne({
+		_id: req.body.reg_id
+	});
+	if (!user) return res.status(400).json({
+		registered: false
+	});
 
-    const validPass = await bcrypt.compare(req.body.password, user.password);
-	if(!validPass) return res.status(400).json({password : false});
-	
+	const validPass = await bcrypt.compare(req.body.password, user.password);
+	if (!validPass) return res.status(400).json({
+		password: false
+	});
+
 	// Suppose Login credential is OK
 	const jwtExpirySeconds = constants.JWT_EXPIRY_SECONDS;
 	const jwt_secret_key = process.env.SESSION_SECRET;
@@ -48,7 +54,7 @@ let validateLogin = async function (req, res) {
 		maxAge: jwtExpirySeconds * 1000
 	});
 	return res.redirect('/account/profile');
-	
+
 }
 
 let signUpPage = function (req, res) {
