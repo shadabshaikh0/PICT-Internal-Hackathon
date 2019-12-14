@@ -20,33 +20,35 @@ let loginPage = function (req, res) {
 	});
 }
 
-let validateLogin = function (req, res) {
-	console.log(req.body);
+let validateLogin = async function (req, res) {
+	const user = await User.findOne({_id : req.body.reg_id});
+    if(! user ) return res.status(400).json({ registered : false});
+
+    const validPass = await bcrypt.compare(req.body.password, user.password);
+	if(!validPass) return res.status(400).json({password : false});
 	
 	// Suppose Login credential is OK
-	credentials_ok = true;
 	const jwtExpirySeconds = constants.JWT_EXPIRY_SECONDS;
 	const jwt_secret_key = process.env.SESSION_SECRET;
-
-	if (credentials_ok) {
-
-		payload = {
-			uid: '12334'
-		}
-		let generated_token = jwt.sign({
-			payload
-		}, jwt_secret_key, {
-			algorithm: 'HS256',
-			expiresIn: jwtExpirySeconds
-		})
-
-		res.cookie(constants.JWT_TOKEN_KEY, generated_token, {
-			maxAge: jwtExpirySeconds * 1000
-		});
-		return res.redirect('/account/profile');
-	} else {
-		return res.redirect('/');
+	payload = {
+		uid: user._id
 	}
+	let generated_token = jwt.sign({
+		payload
+	}, jwt_secret_key, {
+		algorithm: 'HS256',
+		expiresIn: jwtExpirySeconds
+	})
+
+	res.cookie(constants.UUID, user._id, {
+		maxAge: jwtExpirySeconds * 1000
+	});
+
+	res.cookie(constants.JWT_TOKEN_KEY, generated_token, {
+		maxAge: jwtExpirySeconds * 1000
+	});
+	return res.redirect('/account/profile');
+	
 }
 
 let signUpPage = function (req, res) {
@@ -62,8 +64,6 @@ let signUpUser = function (req, res) {
 			console.log('done')
 			return res.redirect('/account/login')
 		})
-
-
 }
 
 module.exports = {
