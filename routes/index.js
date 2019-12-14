@@ -15,7 +15,7 @@ router.use('/account', validate_auth);
 router.use("/", rootRoutes)
 router.use("/account", accountRoutes);
 
-router.use("/fetch", fetchRoutes) ; 
+router.use("/fetch", fetchRoutes);
 
 
 module.exports = router;

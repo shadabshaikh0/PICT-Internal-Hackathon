@@ -5,19 +5,19 @@ const md5 = require('md5');
 
 const userSchema = new mongoose.Schema({
 
-  _id : {
-    type: String, 
-    unique : true
-  }, 
-  name : String,
-  email : String, 
-  mobile : String, 
-  gender : String, 
-  dept : String, 
-  year : String, 
-  gravatar_url : String, 
-  collegeid : String, 
-  password : String
+  _id: {
+    type: String,
+    unique: true
+  },
+  name: String,
+  email: String,
+  mobile: String,
+  gender: String,
+  dept: String,
+  year: String,
+  gravatar_url: String,
+  collegeid: String,
+  password: String
 }, {
   timestamps: true
 });
@@ -29,12 +29,12 @@ userSchema.pre('save', async function save(next) {
   const user = this;
   user.gravatar_url = 'http://www.gravatar.com/avatar/' + md5(user.email)
 
-  if(user._id.toLowerCase().startsWith('c'))
+  if (user._id.toLowerCase().startsWith('c'))
     user.dept = 'Computer'
-  else  if(user._id.toLowerCase().startsWith('i'))
-     user.dept = 'Information Technology' 
+  else if (user._id.toLowerCase().startsWith('i'))
+    user.dept = 'Information Technology'
   else
-     user.dept = 'ENTC' 
+    user.dept = 'ENTC'
 
   if (!user.isModified('password')) {
     return next();
