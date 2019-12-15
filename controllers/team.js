@@ -90,22 +90,39 @@ let removeteammember = async function (req, res) {
 
 let deletegroup = async function (req, res) {
     let team_code = req.body.team_code;
-    const filter = {
-        _id: team_code
-    };
-    Team.findOne(filter).then(
-        (doc) => {
-            console.log(doc.team_members)
-            User.updateMany(
-                { _id: { $in: doc.team_members } },
-                { $set: { is_inteam : false, team_id: '', is_teamleader: false  } },
-                {multi: true}
-            ).then(() => {
-                Team.deleteOne(filter).then( () => {
-                    res.json({status : 1})
-                })
-            })
-        }).catch((err) => console.log(err))
+    let reg_id = req.body.reg_id;
+    User.findOne({ _id : reg_id }).then((doc) => {
+        const is_teamleader = doc.is_teamleader
+        const filter = {
+            _id: team_code
+        };
+        if(is_teamleader){
+            Team.findOne(filter).then(
+                (doc) => {
+                    console.log(doc.team_members)
+                    User.updateMany(
+                        { _id: { $in: doc.team_members } },
+                        { $set: { is_inteam : false, team_id: '', is_teamleader: false  } },
+                        {multi: true}
+                    ).then(() => {
+                        Team.deleteOne(filter).then( () => {
+                            res.json({status : 1})
+                        })
+                    })
+                }).catch((err) => console.log(err))
+        } else {
+            const update = {
+                $pull: {
+                    team_members: reg_id
+                }
+            };
+            Team.findOneAndUpdate(filter, update,{ new:true }).then(() => {
+                User.findOneAndUpdate({_id: reg_id}, { is_inteam : false, team_id: '' })
+                    .then(() =>  res.json({status: 1}));
+               
+            });
+        }
+    })
 
 }
 
