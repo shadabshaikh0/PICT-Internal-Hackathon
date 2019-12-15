@@ -19,6 +19,11 @@ router
   .post(accountController.signUpUser)
 
 router
+  .route("/update")
+  .get(accountController.renderUpdatePage)
+  .post(accountController.saveUpdatePage)
+
+router
   .route("/forgot")
   .get(accountController.forgotPasswordPage)
   .post(accountController.sendForgotMail)
