@@ -104,6 +104,9 @@ function display_dashboard(payload) {
   console.log(payload);
 
   let userdata = payload.userdata;
+
+  // Save for later retrieval
+  localStorage.setItem('user_info', JSON.stringify(userdata));
   // let teamdata = payload.teamdata;
 
   // userdata = {
