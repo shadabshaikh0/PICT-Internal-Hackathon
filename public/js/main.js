@@ -98,6 +98,18 @@ function ready() {
   }
   hideAll();
   loaddata();
+  tabLoad() ; 
+}
+
+function getGetParam(param){
+  var url_string = window.location.href
+  var url = new URL(url_string);
+  return url.searchParams.get(param);
+}
+
+function tabLoad(){
+  let tab_name = getGetParam('tab') ;
+  openTab('id_section_' + tab_name, document.getElementById(tab_name + '_tab')) ; 
 }
 
 function hideAll() {
@@ -105,7 +117,7 @@ function hideAll() {
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
   }
-  openTab('id_section_profile', document.getElementById('default_header_id'))
+  
 }
 
 
@@ -113,11 +125,12 @@ function openTab(sectionName, element) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
   tabheaders = document.getElementsByClassName("tab_headers");
-  console.log(tabheaders)
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
     tabheaders[i].classList.remove('is-active');
   }
   document.getElementById(sectionName).style.display = "block";
   element.classList.add('is-active');
+  let tab_name = sectionName.split('id_section_')[1] ; 
+  history.pushState({}, null, window.location.href.split('?')[0] + '?tab=' + tab_name);
 }
