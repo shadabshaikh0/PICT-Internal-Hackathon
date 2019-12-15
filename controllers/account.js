@@ -36,7 +36,6 @@ let changePasswordPage = function (req, res) {
 }
 let changePass = function (req, res) {
 	console.log('change pass function')
-
 }
 let loginPage = function (req, res) {
 	console.log('Login Page function')
@@ -78,14 +77,11 @@ let sendMail = function (email) {
 let sendForgotMail = async function (req, res) {
 
 	const user = await User.findOne({
-		email: req.body.email
+		_id: req.body.regid
 	});
 
 	if (user) {
 		console.log(user._id);
-		if (!user) return res.status(400).json({
-			registered: false
-		});
 		let password_hash = hashID(user._id);
 		let reset_link = process.env.BASE_URL + '/account/changePassword?time=' + password_hash + "?id=" + user._id;
 		var email = {
@@ -105,8 +101,6 @@ let sendForgotMail = async function (req, res) {
 }
 
 let sendWelcomeMail = async function (email, user) {
-
-
 	readHTMLFile('./public/emailconfirm.html', function(err, html) {
 		var template = handlebars.compile(html);
 		var replacements = {
@@ -122,12 +116,6 @@ let sendWelcomeMail = async function (email, user) {
 		};
 		sendMail(email) ; 
 	});
-
-	
-
-	
-	
-	
 }
 
 
@@ -138,13 +126,13 @@ let validateLogin = async function (req, res) {
 	if (!user) return res.status(400).json({
 		registered: false
 	});
-
+	console.log(req.body);
+	
 	const validPass = await bcrypt.compare(req.body.password, user.password);
 	if (!validPass) return res.status(400).json({
 		password: false
 	});
 
-	// Suppose Login credential is OK
 	const jwtExpirySeconds = constants.JWT_EXPIRY_SECONDS;
 	const jwt_secret_key = process.env.SESSION_SECRET;
 	payload = {

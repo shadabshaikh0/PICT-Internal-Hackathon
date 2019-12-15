@@ -57,22 +57,6 @@
             <div id="navbarMenu" class="navbar-menu">
                 <div class="navbar-end">
 
-                    <span class="navbar-item">
-                        <a class="butt button" href="#">
-                            <span class="icon">
-                                <i class="fa fa-book"></i>
-                            </span>
-                            <span>Rules</span>
-                        </a>
-                    </span>
-                    <span class="navbar-item">
-                        <a class="butt button" href="#">
-                            <span class="icon">
-                                <i class="fa fa-superpowers"></i>
-                            </span>
-                            <span>FAQ</span>
-                        </a>
-                    </span>
                     <span class=" navbar-item" onclick="signout();">
                         <a class="butt button ">
                             <span class="butt">Sign Out</span>
@@ -92,26 +76,20 @@
         <ul>
             <li id="profile_tab" class="tab_headers" onclick="openTab('id_section_profile', this);">
                 <a>
-                    <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
+                    <span class="icon is-small"><i class="fas fa-user" aria-hidden="true"></i></span>
                     <span>Profile</span>
                 </a>
             </li>
             <li id="team_tab" class="tab_headers" onclick="openTab('id_section_team', this);">
                 <a>
-                    <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
+                    <span class="icon is-small"><i class="fas fa-users" aria-hidden="true"></i></span>
                     <span>Team Profile</span>
                 </a>
             </li>
-            <li id="statements_tab" class="tab_headers" onclick="openTab('id_section_statements', this);">
+            <li id="statements_tab" class="tab_headers" onclick="openTab('id_section_teamsubmission', this);">
                 <a>
-                    <span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span>
-                    <span>Problem Statements</span>
-                </a>
-            </li>
-            <li id="notifications_tab" class="tab_headers" onclick="openTab('id_section_notifications', this);">
-                <a>
-                    <span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span>
-                    <span>Notifications</span>
+                    <span class="icon is-small"><i class="fas fa-file-code-o " aria-hidden="true"></i></span>
+                    <span>Team Submission</span>
                 </a>
             </li>
         </ul>
@@ -130,22 +108,20 @@
                 </div>
                 <div class="column">
                     <h1 class="title" id="user_name">
-                        Shadab Shaikh
                     </h1>
                     <h2 class="subtitle" id="user_regid">
-                        C2K178987
                     </h2>
                     <div class="box">
                         <article class="media">
                             <div class="media-left">
                                 <figure class="image is-24x24">
-                                    <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+                                    <img src="/images/email.png" alt="Image">
                                 </figure>
                             </div>
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong id="user_email">johnswimt@gmail.com</strong>
+                                        <strong id="user_email"></strong>
                                     </p>
                                 </div>
                             </div>
@@ -155,13 +131,13 @@
                         <article class="media">
                             <div class="media-left">
                                 <figure class="image is-24x24">
-                                    <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+                                    <img src="/images/graduation.png" alt="Image">
                                 </figure>
                             </div>
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong id="user_deptyear">Computer Engineering, BE</strong>
+                                        <strong id="user_deptyear"></strong>
                                     </p>
                                 </div>
                             </div>
@@ -171,13 +147,13 @@
                         <article class="media">
                             <div class="media-left">
                                 <figure class="image is-24x24">
-                                    <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+                                    <img src="/images/smartphone.png" alt="Image">
                                 </figure>
                             </div>
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong id="user_mobile">894375948</strong>
+                                        <strong id="user_mobile"></strong>
                                     </p>
                                 </div>
                             </div>
@@ -186,9 +162,6 @@
                 </div>
 
             </div>
-            <center>
-                <button class="button mybutton ">Update Profile</button>
-            </center>
 
         </div>
 
@@ -210,7 +183,7 @@
                                     <i class="fas fa-check"></i> <!-- OR fa-exclamation-triangle-->
                                 </span>
                             </div>
-                            <p class="help is-success">This username is available</p> <!-- OR is-danger -->
+                            <p id="message" class="help"></p> <!-- OR is-danger -->
                         </div>
                         <button class="button mybutton" onclick="createTeam_and_generateCode()">Generate Team Invite
                             Code</button><br>
@@ -235,10 +208,8 @@
             <div class="columns" id="team_members_list_section">
                 <div class="column">
                     <h1 class="title" id="teamname">
-                        Simplifiers!!
                     </h1>
                     <h2 class="subtitle" id="teamid">
-                        GROUP ID
                     </h2>
 
                     <div class="box">
@@ -366,13 +337,9 @@
 
         </div>
 
-        <div class="container tabcontent" id="id_section_statements">
-            Problem Statements
+        <div class="container tabcontent" id="id_section_teamsubmission">
         </div>
 
-        <div class="container tabcontent" id="id_section_notifications">
-            Notifications
-        </div>
     </section>
     <!-- Sections End  -->
 
