@@ -40,7 +40,12 @@ const userSchema = new mongoose.Schema({
  */
 userSchema.pre('save', async function save(next) {
   const user = this;
-  user.gravatar_url = 'http://www.gravatar.com/avatar/' + md5(user.email) + '?s=700'
+  const femaleGravatars = [ "https://image.flaticon.com/icons/png/512/163/163804.png", "https://image.flaticon.com/icons/png/512/145/145852.png", "https://image.flaticon.com/icons/png/512/163/163824.png", "https://image.flaticon.com/icons/png/512/163/163830.png"]
+  const maleGravatars= [ "https://image.flaticon.com/icons/png/512/163/163803.png", "https://image.flaticon.com/icons/png/512/163/163847.png", "https://image.flaticon.com/icons/png/512/163/163801.png", "https://image.flaticon.com/icons/png/512/163/163815.png", "https://image.flaticon.com/icons/png/512/163/163827.png", "https://image.flaticon.com/icons/png/512/163/163825.png" , "https://image.flaticon.com/icons/png/512/163/163834.png" ]  
+  console.log(maleGravatars[Math.floor(Math.random()*femaleGravatars.length)]);
+  
+  user.gravatar_url = (user.gender == "female") ? 'http://www.gravatar.com/avatar/' + md5(user.email) + '?s=700' + '&d=' + encodeURI(femaleGravatars[Math.floor(Math.random()*femaleGravatars.length)])
+  : 'http://www.gravatar.com/avatar/' + md5(user.email) + '?s=700' + '&d=' + encodeURI(maleGravatars[Math.floor(Math.random()*maleGravatars.length)]);
 
   if (user._id.toLowerCase().startsWith('c'))
     user.dept = 'Computer'
