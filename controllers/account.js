@@ -51,7 +51,7 @@ let validateLogin = async function (req, res) {
 	res.cookie(constants.JWT_TOKEN_KEY, generated_token, {
 		maxAge: jwtExpirySeconds * 1000
 	});
-	return res.redirect('/account/profile');
+	return res.redirect('/account/profile?tab=profile');
 
 }
 
