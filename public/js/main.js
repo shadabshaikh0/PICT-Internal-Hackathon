@@ -81,7 +81,12 @@ function createTeam_and_generateCode() {
     .then(res => res.json())
     .then(function (res) {
       console.log(res);
-      window.location = '/account/profile?tab=team'
+      if (res.status == 0) {
+        document.getElementById('message').innerText = 'The team name is already taken';
+        document.getElementById('message').classList.add('is-danger');
+      } else {
+        window.location = '/account/profile?tab=team'
+      }
     });
 }
 
@@ -132,7 +137,7 @@ function display_dashboard(payload) {
     teamdata.map((team_member) => {
       document.getElementById('memberimg' + count).src = team_member.gravatar_url
       if ((team_member.is_teamleader === true))
-        document.getElementById('membername' + count).innerText = team_member.name + ' ( Team Leader ) ' ;
+        document.getElementById('membername' + count).innerText = team_member.name + ' ( Team Leader ) ';
       else
         document.getElementById('membername' + count).innerText = team_member.name;
       document.getElementById('memberid' + count).innerText = team_member._id;
@@ -149,8 +154,7 @@ function display_dashboard(payload) {
 
   document.getElementById('teamname').innerText = payload.team_name;
   document.getElementById('teamid').innerText = userdata.team_id;
-
-
+  document.getElementById('teamid1').value = userdata.team_id;
 }
 
 function getCookie(name) {
@@ -191,29 +195,37 @@ function ready() {
   loadBot();
   hideAll();
   loaddata();
-  tabLoad() ; 
+  tabLoad();
 }
 
 function loadBot() {
-  (function(d, m){
-    var kommunicateSettings = {"appId":"28703ea1cf3fa6f7bf9c8402651c03d74","popupWidget":true,"automaticChatOpenOnNavigation":true};
-    var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+  (function (d, m) {
+    var kommunicateSettings = {
+      "appId": "28703ea1cf3fa6f7bf9c8402651c03d74",
+      "popupWidget": true,
+      "automaticChatOpenOnNavigation": true
+    };
+    var s = document.createElement("script");
+    s.type = "text/javascript";
+    s.async = true;
     s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
-    var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
-    window.kommunicate = m; m._globals = kommunicateSettings;
-  })(document, window.kommunicate || {}); 
+    var h = document.getElementsByTagName("head")[0];
+    h.appendChild(s);
+    window.kommunicate = m;
+    m._globals = kommunicateSettings;
+  })(document, window.kommunicate || {});
 }
 
-function getGetParam(param){
+function getGetParam(param) {
   var url_string = window.location.href
   var url = new URL(url_string);
   return url.searchParams.get(param);
 }
 
-function tabLoad(){
-  let tab_name = getGetParam('tab') ;
-  console.log(tab_name) ;
-  openTab('id_section_' + tab_name, document.getElementById(tab_name + '_tab')) ; 
+function tabLoad() {
+  let tab_name = getGetParam('tab');
+  console.log(tab_name);
+  openTab('id_section_' + tab_name, document.getElementById(tab_name + '_tab'));
 }
 
 function hideAll() {
@@ -221,7 +233,7 @@ function hideAll() {
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
   }
-  
+
 }
 
 function openTab(sectionName, element) {
@@ -235,6 +247,6 @@ function openTab(sectionName, element) {
   }
   document.getElementById(sectionName).style.display = "block";
   element.classList.add('is-active');
-  let tab_name = sectionName.split('id_section_')[1] ; 
+  let tab_name = sectionName.split('id_section_')[1];
   history.pushState({}, null, window.location.href.split('?')[0] + '?tab=' + tab_name);
 }

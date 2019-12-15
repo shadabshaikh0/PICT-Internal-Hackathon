@@ -15,9 +15,9 @@
         <div class="hero-body">
             <div class="container has-text-centered">
                 <div class="column is-4 is-offset-4">
-                    <h3 class="title has-text-black">Login</h3>
+                    <h3 class="title has-text-black">Change Password</h3>
                     <hr class="login-hr">
-                    <p class="subtitle has-text-black">Please login to proceed.</p>
+                    <p class="subtitle has-text-black"></p>
                     <div class="box">
                         <figure class="avatar">
                             <img src="/images/login.png" height="30" width="40%">
@@ -25,22 +25,20 @@
                         <form method="POST" action="/account/forgot">
                             <div class="field">
                                 <div class="control">
-                                    <input name="email" class="input is-medium" type="email"
-                                        placeholder="Enter Email"
-                                        style="color: black;font-weight: bold" autofocus="">
+                                    <input name="regid" class="input is-medium" type="text"
+                                        placeholder="Enter Registration ID" style="color: black;font-weight: bold"
+                                        autofocus="">
                                 </div>
                             </div>
 
-                            <input type="submit" value="Login" />
-                            <!-- <button class="mybutton button is-block is-medium is-fullwidth">Login -->
-                            </button>
+                            <input class="mybutton button is-block is-medium is-fullwidth" onclick="alert('Sent password reset link to your registered mail')" type="submit"
+                                value="Send Password Reset Link" />
                         </form>
                         <div>
-
+                            <br>
                             <p class="has-text-grey">
-                                <a href="/account/signup">Sign Up</a> &nbsp;·&nbsp;
-                                <a href="/account/forgot">Forgot Password</a> &nbsp;·&nbsp;
-                                <a href="./">Need Help?</a>
+                                <a href="/account/login">Login</a> &nbsp;·&nbsp;
+                                <a href="/account/signup">Sign Up</a>
                             </p>
                         </div>
                     </div>
