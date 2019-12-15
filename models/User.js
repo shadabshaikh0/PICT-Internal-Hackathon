@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
  */
 userSchema.pre('save', async function save(next) {
   const user = this;
-  user.gravatar_url = 'http://www.gravatar.com/avatar/' + md5(user.email)
+  user.gravatar_url = 'http://www.gravatar.com/avatar/' + md5(user.email) + '?s=700'
 
   if (user._id.toLowerCase().startsWith('c'))
     user.dept = 'Computer'
