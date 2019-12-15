@@ -1,6 +1,8 @@
-function deletegroup(){
+function deletegroup() {
   let team_code = document.getElementById('teamid').innerText;
+  let reg_id = getCookie('uuid');
   data = {
+    reg_id: reg_id,
     team_code: team_code
   };
   fetch('http://localhost:8000/team/deletegroup', {
@@ -17,10 +19,10 @@ function deletegroup(){
     });
 }
 
-function removeMember(memberid){
+function removeMember(memberid) {
   let reg_id = document.getElementById(memberid).innerText;
   let team_code = document.getElementById('teamid').innerText;
-  console.log(reg_id,team_code)
+  console.log(reg_id, team_code)
   data = {
     reg_id: reg_id,
     team_code: team_code
@@ -38,6 +40,7 @@ function removeMember(memberid){
       window.location = "/account/profile"
     });
 }
+
 function joinTeam() {
   let team_code = document.getElementById("team_code_input").value;
   let reg_id = getCookie('uuid');
@@ -111,16 +114,19 @@ function display_dashboard(payload) {
     let teamdata = payload.teamdata;
     let count = 1;
     teamdata.map((team_member) => {
-      document.getElementById('membername' + count).innerText = team_member.name;
+      if ((team_member.is_teamleader === true))
+        document.getElementById('membername' + count).innerText = team_member.name + ' ( Team Leader ) ' ;
+      else
+        document.getElementById('membername' + count).innerText = team_member.name;
       document.getElementById('memberid' + count).innerText = team_member._id;
-      if (( userdata.is_teamleader === true ))
-        if( team_member.is_teamleader !== true )
+      if ((userdata.is_teamleader === true))
+        if (team_member.is_teamleader !== true)
           document.getElementById('memberbtn' + count).style.display = "block";
-      
+
       count++;
     })
-    if ( userdata.is_teamleader == true )
-    document.getElementById('deletegroupbtn').style.display = "block";
+    if (userdata.is_teamleader === true)
+      document.getElementById('deletegroupbtn').innerHTML = "Leave & Delete Team";
 
   }
 
