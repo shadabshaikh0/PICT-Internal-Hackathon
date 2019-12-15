@@ -16,7 +16,7 @@ function getDomain(url, subdomain) {
   return url;
 }
 
-let API_BASE = window.location.protocol + '://' + getDomain(window.location.href )
+let API_BASE = null
 function deletegroup() {
   let team_code = document.getElementById('teamid').innerText;
   let reg_id = getCookie('uuid');
@@ -170,7 +170,6 @@ function display_dashboard(payload) {
 
   document.getElementById('teamname').innerText = payload.team_name;
   document.getElementById('teamid').innerText = userdata.team_id;
-  document.getElementById('teamid1').value = userdata.team_id;
 }
 
 function getCookie(name) {
@@ -208,6 +207,7 @@ function loaddata() {
 }
 
 function ready() {
+  API_BASE =  window.location.href.split(':')[0] + '://' + getDomain(window.location.href, true)
   loadBot();
   hideAll();
   loaddata();
