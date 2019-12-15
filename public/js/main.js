@@ -132,6 +132,7 @@ function display_dashboard(payload) {
     let teamdata = payload.teamdata;
     let count = 1;
     teamdata.map((team_member) => {
+      document.getElementById('memberimg' + count).src = team_member.gravatar_url
       if ((team_member.is_teamleader === true))
         document.getElementById('membername' + count).innerText = team_member.name + ' ( Team Leader ) ';
       else
@@ -189,12 +190,23 @@ function loaddata() {
 }
 
 function ready() {
+  loadBot();
   hideAll();
   loaddata();
   tabLoad();
 }
 
-function getGetParam(param) {
+function loadBot() {
+  (function(d, m){
+    var kommunicateSettings = {"appId":"28703ea1cf3fa6f7bf9c8402651c03d74","popupWidget":true,"automaticChatOpenOnNavigation":true};
+    var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+    s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+    var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+    window.kommunicate = m; m._globals = kommunicateSettings;
+  })(document, window.kommunicate || {}); 
+}
+
+function getGetParam(param){
   var url_string = window.location.href
   var url = new URL(url_string);
   return url.searchParams.get(param);
