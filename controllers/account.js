@@ -7,14 +7,12 @@ const crypto = require('crypto');
 
 
 let profilePage = function (req, res) {
-	console.log('profilePage')
 	res.render('dashboard', {
 		title: 'Dashboard'
 	});
 }
 
 let loginPage = function (req, res) {
-	console.log('Login Page function')
 	res.render('login', {
 		title: 'Login'
 	});
@@ -67,7 +65,6 @@ let signUpUser = function (req, res) {
 	const new_user = new User(req.body)
 	new_user.save()
 		.then(() => {
-			console.log('done')
 			return res.redirect('/account/login')
 		})
 }

@@ -17,7 +17,20 @@ const userSchema = new mongoose.Schema({
   year: String,
   gravatar_url: String,
   collegeid: String,
-  password: String
+  password: String,
+  is_teamleader: {
+    type: Boolean,
+    default: false
+  },
+  is_inteam: {
+    type: Boolean,
+    default: false
+  },
+  team_id: {
+    type: String,
+    default: ""
+  }
+
 }, {
   timestamps: true
 });
