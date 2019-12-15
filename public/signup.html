@@ -8,6 +8,25 @@
     <title>Login</title>
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <script>
+        function showPassword() {
+            let x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+
+        function showconfPassword() {
+            let x = document.getElementById("conf_password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -35,16 +54,19 @@
                                         style="color: black;font-weight: bold" autofocus="">
                                 </div>
                             </div>
-                            <div class="select">
-                                    <select  name="year">
-                                      <option value="FE">FE</option>
-                                      <option value="SE">SE</option>
-                                      <option value="TE">TE</option>
-                                      <option value="BE">BE</option>
-                                    </select>
+
+                            <div class="select is-fullwidth">
+                                <select name="year">
+                                    <option value="FE"> First Year (FE)</option>
+                                    <option value="SE"> Second Year (SE)</option>
+                                    <option value="TE"> Third Year (TE)</option>
+                                    <option value="BE"> Final Year (BE)</option>
+                                </select>
                             </div>
-                            <div class="control">
-                                <label class="radio"> 
+
+                            <div><br></div>
+                            <div class="control is-fullwidth">
+                                <label class="radio">
                                     <input name="gender" type="radio" value="female">
                                     Female
                                 </label>
@@ -53,6 +75,7 @@
                                     Male
                                 </label>
                             </div>
+                            <div><br></div>
 
                             <div class="field">
                                 <div class="control">
@@ -70,20 +93,20 @@
 
                             <div class="field">
                                 <div class="control">
-                                    <input name="password" class="input is-medium" required type="password"
+                                    <input name="password" class="input is-medium" type="password"
                                         placeholder="Your Password" style="color: black;font-weight: bold">
                                 </div>
                             </div>
 
                             <div class="field">
                                 <div class="control">
-                                    <input name="conf_password" class="input is-medium" required type="password"
-                                        placeholder="Your Password" style="color: black;font-weight: bold">
+                                    <input name="conf_password" class="input is-medium" type="conf_password"
+                                        placeholder="Confirm Password" style="color: black;font-weight: bold">
                                 </div>
                             </div>
 
                             <div class="field">
-                                <div class="file is-centered is-medium">
+                                <div class="file is-centered is-medium is-fullwidth">
                                     <label class="file-label">
                                         <input name="collegeid" class="file-input" type="file" name="resume" required>
                                         <span class="file-cta">
@@ -95,15 +118,15 @@
                                 </div>
                             </div>
 
-                            <input type="submit" value="SUBMIT" />
+                            <input class="mybutton button is-block is-medium is-fullwidth" type="submit"
+                                value="SUBMIT" />
                             <!-- <button class="mybutton button is-block is-medium is-fullwidth"> Sign Up</button> -->
                         </form>
                         <div>
-
+                            <br>
                             <p class="has-text-grey">
-                                <a href="./login.html">Login</a> &nbsp;·&nbsp;
-                                <a href="./forgot.html">Forgot Password</a> &nbsp;·&nbsp;
-                                <a href="./">Need Help?</a>
+                                <a href="/account/login">Login</a> &nbsp;·&nbsp;
+                                <a href="/account/forgot">Forgot Password</a>
                             </p>
                         </div>
                     </div>
