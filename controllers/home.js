@@ -24,4 +24,18 @@ exports.profile = (req, res) => {
   res.render('dashboard', {
     title: 'Dashboard'
   });
+<<<<<<< HEAD
 };
+exports.forgot = (req,res) =>{
+  res.render('forgot', {
+    title: 'ForgotPassword'
+  });
+}
+exports.changePassword = (req,res) =>{
+  res.render('changePassword', {
+    title: 'Chnage Password'
+  });
+}
+=======
+};
+>>>>>>> dbafc05fc7db22d1e05370714d3237e028fc0e58
