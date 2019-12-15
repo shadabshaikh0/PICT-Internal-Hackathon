@@ -40,7 +40,8 @@ const userSchema = new mongoose.Schema({
  */
 userSchema.pre('save', async function save(next) {
   const user = this;
-  user.gravatar_url = 'http://www.gravatar.com/avatar/' + md5(user.email) + '?s=700'
+  user.gravatar_url = (user.gender == "female") ? 'http://www.gravatar.com/avatar/' + md5(user.email) + '?s=700' + '&d=' + encodeURI('https://image.flaticon.com/icons/png/512/163/163847.png')
+  : 'http://www.gravatar.com/avatar/' + md5(user.email) + '?s=700' + '&d=' + encodeURI('https://image.flaticon.com/icons/png/512/163/163804.png');
 
   if (user._id.toLowerCase().startsWith('c'))
     user.dept = 'Computer'
