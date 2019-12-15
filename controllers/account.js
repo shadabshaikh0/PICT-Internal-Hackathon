@@ -4,19 +4,132 @@ const User = require('../models/User.js')
 
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
+const nodemailer = require('nodemailer');
+var handlebars = require('handlebars');
+var fs = require('fs');
 
+const enc_dec = require('../utils/enc_dec');
+
+var readHTMLFile = function(path, callback) {
+    fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
+        if (err) {
+            throw err;
+            callback(err);
+        }
+        else {
+            callback(null, html);
+        }
+    });
+};
 
 let profilePage = function (req, res) {
+	console.log('profilePage')
 	res.render('dashboard', {
 		title: 'Dashboard'
 	});
 }
+let changePasswordPage = function (req, res) {
+	console.log('change Password')
+	res.render('changePassword', {
+		title: 'change Password'
+	});
+}
+let changePass = function (req, res) {
+	console.log('change pass function')
 
+}
 let loginPage = function (req, res) {
+	console.log('Login Page function')
 	res.render('login', {
 		title: 'Login'
 	});
 }
+
+function hashID(id) {
+	let reset_link = enc_dec.encrypt(id)
+	console.log(reset_link);
+	return reset_link.encryptedData;
+}
+
+let sendMail = function (email) {
+
+	console.log('send Mail function')
+
+	let transport = nodemailer.createTransport({
+		// host: 'smtp.mailtrap.io',
+		service: 'gmail',
+		// port: 2525,
+		auth: {
+			user: 'internalhack2020@gmail.com',
+			pass: 'internalhack@1'
+		}
+	});
+	/// To do : assume already reg students has unique email
+	transport.sendMail(email, function (err, info) {
+		if (err) {
+			console.log(err)
+			console.log("error")
+		} else {
+			console.log("email sent ");
+		}
+	});
+}
+
+let sendForgotMail = async function (req, res) {
+
+	const user = await User.findOne({
+		email: req.body.email
+	});
+
+	if (user) {
+		console.log(user._id);
+		if (!user) return res.status(400).json({
+			registered: false
+		});
+		let password_hash = hashID(user._id);
+		let reset_link = process.env.BASE_URL + '/account/changePassword?time=' + password_hash + "?id=" + user._id;
+		var email = {
+			from: 'internalhack2020@gmail.com',
+			to: user.email,
+			subject: 'Internal hackathon password reset link mail',
+			text: 'Hello' + user.name + '</strong>,<br><br>you recently requested password reset Link. This link is only valid for 30 minutes.',
+			html: 'Hello<strong>' + user.name + '</strong>,<br><br>you recently requested password reset Link. This link is only valid for 30 minutes\n Reset Link ' + reset_link
+		};
+		// Send Mail
+		sendMail(email) ; 
+		return res.redirect('/');
+	}
+	else {
+		return res.send('Error No Mail')
+	}
+}
+
+let sendWelcomeMail = async function (email, user) {
+
+
+	readHTMLFile('./public/emailconfirm.html', function(err, html) {
+		var template = handlebars.compile(html);
+		var replacements = {
+			 username: user.name
+		};
+		var htmlToSend = template(replacements);
+		var email = {
+			from: 'internalhack2020@gmail.com',
+			to: user.email,
+			subject: 'Registration Successfull',
+			//text: 'ested password reset Link. This link is only valid for 30 minutes.',
+			html: htmlToSend
+		};
+		sendMail(email) ; 
+	});
+
+	
+
+	
+	
+	
+}
+
 
 let validateLogin = async function (req, res) {
 	const user = await User.findOne({
@@ -65,14 +178,52 @@ let signUpUser = function (req, res) {
 	const new_user = new User(req.body)
 	new_user.save()
 		.then(() => {
+			console.log('done')
+			let email = { }
+			sendWelcomeMail(email, new_user) ; 
 			return res.redirect('/account/login')
 		})
 }
+let forgotPasswordPage = function (req, res) {
+	console.log('forgotPassword function')
+	res.render('forgot', {
+		title: 'Forgot'
+	});
+}
+let updatePass = async function (req, res) {
+	console.log('update password function')
+	const salt = await bcrypt.genSalt(10);
+	const hashedPassword = await bcrypt.hash(req.body.password, salt);
+	let id = req.body.id;
+	let challenge = req.body.time;
 
+	console.log(challenge)
+
+	const user = await User.findOne({
+		_id: req.body.regid
+	});
+
+	let challenge_id = enc_dec.decrypt(challenge);
+	console.log(challenge_id);
+
+	if (user._id == challenge_id) {
+		User.updateOne({ _id: user._id }, {
+			password: hashedPassword
+		}, function (err, affected, resp) {
+			//console.log(resp);
+			return res.redirect('/account/login')
+		});
+	}
+}
 module.exports = {
 	loginPage: loginPage,
 	validateLogin: validateLogin,
 	profilePage: profilePage,
 	signUpPage: signUpPage,
-	signUpUser: signUpUser
+	signUpUser: signUpUser,
+	forgotPasswordPage: forgotPasswordPage,
+	sendForgotMail: sendForgotMail,
+	changePasswordPage: changePasswordPage,
+	updatePass: updatePass
+
 }

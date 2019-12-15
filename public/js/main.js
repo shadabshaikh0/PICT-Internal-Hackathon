@@ -90,6 +90,7 @@ function delete_cookie(name) {
 }
 
 function signout() {
+  console.log('Clck')
   delete_cookie('jwt_token');
   window.location = '/';
 }
@@ -98,6 +99,18 @@ function display_dashboard(payload) {
   console.log(payload);
 
   let userdata = payload.userdata;
+  // let teamdata = payload.teamdata;
+
+  // userdata = {
+  //   gravatar: 'https://bulma.io/images/placeholders/128x128.png',
+  //   name: 'Shadab Majid Shaikh',
+  //   _id: 'C39824782738',
+  //   email: 'shadabshaik@gamil.com',
+  //   mobile: '8974573495',
+  //   dept: 'Computer',
+  //   year: 'BE'
+  // }
+
 
   if (userdata.gravatar_url == 'http://www.gravatar.com/avatar/2533554fff89b7aef3f8aff5eef02a0e') {
     userdata.gravatar_url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwjmWcbAVI_chtFQiSWVBZCGbFgg3r9F4j_SGIgPHnQtTasagzWA&s'
@@ -144,6 +157,7 @@ function getCookie(name) {
 
 function loaddata() {
   reg_id = getCookie('uuid');
+  console.log(reg_id);
 
   data = {
     id: reg_id
@@ -199,6 +213,7 @@ function openTab(sectionName, element) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
   tabheaders = document.getElementsByClassName("tab_headers");
+  console.log(tabheaders)
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
     tabheaders[i].classList.remove('is-active');
