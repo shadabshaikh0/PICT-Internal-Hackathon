@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Internal Hackathon</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+    <script src="/js/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/landing.css">
+    <style>
+        nav.navbar {
+            background-color: #4A148C;
+            font-size: 1.4rem !important;
+        }
+
+        .navbar-burger,
+        .burger {
+            color: white;
+        }
+
+        .mybutton,
+        .mybutton:hover {
+            background-color: #4A148C;
+            color: white;
+        }
+
+        .custom_box {
+            background-color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body onload="ready()">
+
+    <!-- Nav bar start -->
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <span class="navbar-burger burger"
+                    onclick="document.querySelector('.navbar-menu').classList.toggle('is-active');"
+                    data-target="navbarMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end">
+
+                    <span class="navbar-item">
+                        <a class="butt button" href="#">
+                            <span class="icon">
+                                <i class="fa fa-book"></i>
+                            </span>
+                            <span>Rules</span>
+                        </a>
+                    </span>
+                    <span class="navbar-item">
+                        <a class="butt button" href="#">
+                            <span class="icon">
+                                <i class="fa fa-superpowers"></i>
+                            </span>
+                            <span>FAQ</span>
+                        </a>
+                    </span>
+                    <span class=" navbar-item" onclick="signout();">
+                        <a class="butt button ">
+                            <span class="butt">Sign Out</span>
+                        </a>
+                    </span>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Nav bar end -->
+
+    <!-- Tab start -->
+
+    <div class="tabs is-centered is-medium">
+        <ul>
+            <li id="default_header_id" class="tab_headers" onclick="openTab('id_section_profile', this);">
+                <a>
+                    <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
+                    <span>Profile</span>
+                </a>
+            </li>
+            <li class="tab_headers" onclick="openTab('id_section_team', this);">
+                <a>
+                    <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
+                    <span>Team Profile</span>
+                </a>
+            </li>
+            <li class="tab_headers" onclick="openTab('id_section_problem_stmts', this);">
+                <a>
+                    <span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span>
+                    <span>Problem Statements</span>
+                </a>
+            </li>
+            <li class="tab_headers" onclick="openTab('id_section_notifications', this);">
+                <a>
+                    <span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span>
+                    <span>Notifications</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Tab end -->
+
+    <!-- Sections start  -->
+    <section class="section">
+        <div class="container tabcontent" id="id_section_profile">
+            <div class="columns">
+                <div class="column is-one-quarter">
+                    <figure class="image is-square">
+                        <img id="user_gravatar" class="is-rounded"
+                            src="https://bulma.io/images/placeholders/64x64.png">
+                    </figure>
+                </div>
+                <div class="column">
+                    <h1 class="title" id="user_name">
+                        Shadab Shaikh
+                    </h1>
+                    <h2 class="subtitle" id="user_regid">
+                        C2K178987
+                    </h2>
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-24x24">
+                                    <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <strong id="user_email">johnswimt@gmail.com</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-24x24">
+                                    <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <strong id="user_deptyear">Computer Engineering, BE</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-24x24">
+                                    <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <strong id="user_mobile">894375948</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+            </div>
+            <center>
+                <button class="button mybutton ">Update Profile</button>
+            </center>
+
+        </div>
+
+        <div class="container tabcontent" id="id_section_team">
+            <section class="section" id="create_join_section">
+                <div class="columns is-centered">
+                    <div class="column custom_box is-two-fifths">
+                        <div class="field">
+                            <label class="label">Enter Team Name</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input is-danger" type="text" placeholder="Enter Team Name">
+                                <!-- OR is-success -->
+                                </span>
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                                <span class="icon is-small is-right">
+                                    <i class="fas fa-check"></i> <!-- OR fa-exclamation-triangle-->
+                                </span>
+                            </div>
+                            <p class="help is-success">This username is available</p> <!-- OR is-danger -->
+                        </div>
+                        <button class="button mybutton">Generate Team Invite Code</button><br>
+                        <div class="field">
+                            <label class="label">Team Invite Code</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Copy link from here">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="column is-1" style="text-align: center">
+                        OR
+                    </div>
+
+                    <div class="column custom_box is-two-fifths">
+                        <div class="field">
+                            <label class="label">Team Invite Code</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Paste link here">
+                            </div>
+                        </div>
+                        <button class="button mybutton">Join Team!</button>
+                    </div>
+
+                </div>
+            </section>
+            <div class="columns" id="team_members_list_section">
+                <div class="column">
+                    <h1 class="title" id="teamname">
+                        Simplifiers!!
+                    </h1>
+                    <h2 class="subtitle" id="teamid">
+                        GROUP ID
+                    </h2>
+
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-24x24">
+                                    <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <strong id="membername1">johnswimt@gmail.com</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-24x24">
+                                    <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <strong id="membername2">Computer Engineering, BE</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-24x24">
+                                    <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <strong id="membername3">894375948</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-24x24">
+                                    <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <strong id="membername4">894375948</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-24x24">
+                                    <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <strong id="membername5">894375948</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-24x24">
+                                    <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <strong id="membername6">894375948</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <center>
+                    <button class="button is-danger">Delete Group</button>
+                </center>
+            </div>
+
+        </div>
+
+        <div class="container tabcontent" id="id_section_problem_stmts">
+            Problem Statements
+        </div>
+
+        <div class="container tabcontent" id="id_section_notifications">
+            Notifications
+        </div>
+    </section>
+    <!-- Sections End  -->
+
+
+</body>
+
+</html>
