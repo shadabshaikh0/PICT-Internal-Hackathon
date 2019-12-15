@@ -32,6 +32,10 @@
             background-color: white;
             text-align: center;
         }
+
+        .inlineit div {
+            display: inline-block;
+        }
     </style>
 </head>
 
@@ -86,25 +90,25 @@
 
     <div class="tabs is-centered is-medium">
         <ul>
-            <li id="default_header_id" class="tab_headers" onclick="openTab('id_section_profile', this);">
+            <li id="profile_tab" class="tab_headers" onclick="openTab('id_section_profile', this);">
                 <a>
                     <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
                     <span>Profile</span>
                 </a>
             </li>
-            <li class="tab_headers" onclick="openTab('id_section_team', this);">
+            <li id="team_tab" class="tab_headers" onclick="openTab('id_section_team', this);">
                 <a>
                     <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
                     <span>Team Profile</span>
                 </a>
             </li>
-            <li class="tab_headers" onclick="openTab('id_section_problem_stmts', this);">
+            <li id="statements_tab" class="tab_headers" onclick="openTab('id_section_statements', this);">
                 <a>
                     <span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span>
                     <span>Problem Statements</span>
                 </a>
             </li>
-            <li class="tab_headers" onclick="openTab('id_section_notifications', this);">
+            <li id="notifications_tab" class="tab_headers" onclick="openTab('id_section_notifications', this);">
                 <a>
                     <span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span>
                     <span>Notifications</span>
@@ -121,8 +125,7 @@
             <div class="columns">
                 <div class="column is-one-quarter">
                     <figure class="image is-square">
-                        <img id="user_gravatar" class="is-rounded"
-                            src="https://bulma.io/images/placeholders/64x64.png">
+                        <img id="user_gravatar" class="is-rounded" src="https://bulma.io/images/placeholders/64x64.png">
                     </figure>
                 </div>
                 <div class="column">
@@ -196,7 +199,8 @@
                         <div class="field">
                             <label class="label">Enter Team Name</label>
                             <div class="control has-icons-left has-icons-right">
-                                <input class="input is-danger" type="text" placeholder="Enter Team Name">
+                                <input class="input is-danger" id="team_name_input" type="text"
+                                    placeholder="Enter Team Name">
                                 <!-- OR is-success -->
                                 </span>
                                 <span class="icon is-small is-left">
@@ -208,13 +212,8 @@
                             </div>
                             <p class="help is-success">This username is available</p> <!-- OR is-danger -->
                         </div>
-                        <button class="button mybutton">Generate Team Invite Code</button><br>
-                        <div class="field">
-                            <label class="label">Team Invite Code</label>
-                            <div class="control">
-                                <input class="input" type="text" placeholder="Copy link from here">
-                            </div>
-                        </div>
+                        <button class="button mybutton" onclick="createTeam_and_generateCode()">Generate Team Invite
+                            Code</button><br>
                     </div>
 
                     <div class="column is-1" style="text-align: center">
@@ -225,10 +224,10 @@
                         <div class="field">
                             <label class="label">Team Invite Code</label>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Paste link here">
+                                <input id="team_code_input" class="input" type="text" placeholder="Paste Code here">
                             </div>
                         </div>
-                        <button class="button mybutton">Join Team!</button>
+                        <button class="button mybutton" onclick="joinTeam()">Join Team!</button>
                     </div>
 
                 </div>
@@ -252,10 +251,14 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong id="membername1">johnswimt@gmail.com</strong>
+                                        <strong id="membername1">Awaiting...</strong>
                                     </p>
                                 </div>
                             </div>
+                            <span id="memberid1" hidden="true">C1</span>
+                            <button id="memberbtn1" style="display: none" class="button is-danger"
+                                onclick="removeMember('memberid1')">Remove</button>
+
                         </article>
                     </div>
 
@@ -269,10 +272,13 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong id="membername2">Computer Engineering, BE</strong>
+                                        <strong id="membername2">Awaiting...</strong>
                                     </p>
                                 </div>
                             </div>
+                            <span id="memberid2" hidden="true">C2</span>
+                            <button id="memberbtn2" style="display: none" class="button is-danger"
+                                onclick="removeMember('memberid2')">Remove</button>
                         </article>
                     </div>
                     <div class="box">
@@ -285,10 +291,14 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong id="membername3">894375948</strong>
+                                        <strong id="membername3">Awaiting...</strong>
                                     </p>
                                 </div>
                             </div>
+                            <span id="memberid3" hidden="true">C3</span>
+                            <button id="memberbtn3" style="display: none" class="button is-danger"
+                                onclick="removeMember('memberid3')">Remove</button>
+
                         </article>
                     </div>
                     <div class="box">
@@ -301,10 +311,13 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong id="membername4">894375948</strong>
+                                        <strong id="membername4">Awaiting...</strong>
                                     </p>
                                 </div>
                             </div>
+                            <span id="memberid4" hidden="true">C4</span>
+                            <button id="memberbtn4" style="display: none" class="button is-danger"
+                                onclick="removeMember('memberid4')">Remove</button>
                         </article>
                     </div>
                     <div class="box">
@@ -317,10 +330,13 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong id="membername5">894375948</strong>
+                                        <strong id="membername5">Awaiting...</strong>
                                     </p>
                                 </div>
                             </div>
+                            <span id="memberid5" hidden="true">C5</span>
+                            <button id="memberbtn5" style="display: none" class="button is-danger"
+                                onclick="removeMember('memberid5')">Remove</button>
                         </article>
                     </div>
                     <div class="box">
@@ -333,21 +349,24 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong id="membername6">894375948</strong>
+                                        <strong id="membername6">Awaiting...</strong>
                                     </p>
                                 </div>
                             </div>
+                            <span id="memberid6" hidden="true">C6</span>
+                            <button id="memberbtn6" style="display: none" class="button is-danger"
+                                onclick="removeMember('memberid6')">Remove</button>
                         </article>
                     </div>
                 </div>
                 <center>
-                    <button class="button is-danger">Delete Group</button>
+                    <button id="deletegroupbtn" onclick="deletegroup()" class="button is-danger">Leave Team</button>
                 </center>
             </div>
 
         </div>
 
-        <div class="container tabcontent" id="id_section_problem_stmts">
+        <div class="container tabcontent" id="id_section_statements">
             Problem Statements
         </div>
 
