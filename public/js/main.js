@@ -1,4 +1,43 @@
+function deletegroup(){
+  let team_code = document.getElementById('teamid').innerText;
+  data = {
+    team_code: team_code
+  };
+  fetch('http://localhost:8000/team/deletegroup', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(function (res) {
+      console.log(res);
+      window.location = "/account/profile"
+    });
+}
 
+function removeMember(memberid){
+  let reg_id = document.getElementById(memberid).innerText;
+  let team_code = document.getElementById('teamid').innerText;
+  console.log(reg_id,team_code)
+  data = {
+    reg_id: reg_id,
+    team_code: team_code
+  };
+  fetch('http://localhost:8000/team/removeteammember', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(function (res) {
+      console.log(res);
+      window.location = "/account/profile"
+    });
+}
 function joinTeam() {
   let team_code = document.getElementById("team_code_input").value;
   let reg_id = getCookie('uuid');
@@ -16,6 +55,7 @@ function joinTeam() {
     .then(res => res.json())
     .then(function (res) {
       console.log(res);
+      window.location = "/account/profile"
     });
 }
 
@@ -55,8 +95,6 @@ function display_dashboard(payload) {
   console.log(payload);
 
   let userdata = payload.userdata;
-  // let teamdata = payload.teamdata;
-
 
   if (userdata.gravatar_url == 'http://www.gravatar.com/avatar/2533554fff89b7aef3f8aff5eef02a0e') {
     userdata.gravatar_url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwjmWcbAVI_chtFQiSWVBZCGbFgg3r9F4j_SGIgPHnQtTasagzWA&s'
@@ -68,25 +106,24 @@ function display_dashboard(payload) {
   document.getElementById('user_deptyear').innerText = userdata.dept + ', ' + userdata.year;
   document.getElementById('user_mobile').innerText = userdata.mobile;
 
-  teamdata = {
-    teamname: "Simplifiers",
-    teamid: "1",
-    membername1: "Shadab Shaikh",
-    membername2: "Surya Jha",
-    membername3: "Sairaj Sawant",
-    membername4: "Shubham Rekkawar",
-    membername5: "Priyanka Khot",
-    membername6: "Pallavi Paliwal",
+  if (userdata.is_inteam) {
+
+    let teamdata = payload.teamdata;
+    let count = 1;
+    teamdata.map((team_member) => {
+      document.getElementById('membername' + count).innerText = team_member.name;
+      document.getElementById('memberid' + count).innerText = team_member._id;
+      if ((userdata.is_teamleader == true) && (count != 1))
+        document.getElementById('memberbtn' + count).style.display = "block";
+      count++;
+    })
+    if ( userdata.is_teamleader == true )
+      document.getElementById('deletegroupbtn').style.display = "block";
+
   }
 
-  document.getElementById('teamname').innerText = teamdata.teamname;
-  document.getElementById('teamid').innerText = teamdata.teamid;
-  document.getElementById('membername1').innerText = teamdata.membername1;
-  document.getElementById('membername2').innerText = teamdata.membername2;
-  document.getElementById('membername3').innerText = teamdata.membername3;
-  document.getElementById('membername4').innerText = teamdata.membername4;
-  document.getElementById('membername5').innerText = teamdata.membername5;
-  document.getElementById('membername6').innerText = teamdata.membername6;
+  document.getElementById('teamname').innerText = payload.team_name;
+  document.getElementById('teamid').innerText = userdata.team_id;
 
 
 }
@@ -99,7 +136,6 @@ function getCookie(name) {
 
 function loaddata() {
   reg_id = getCookie('uuid');
-  console.log(reg_id);
 
   data = {
     id: reg_id
@@ -113,7 +149,6 @@ function loaddata() {
     })
     .then(res => res.json())
     .then(function (res) {
-      console.log(res.userdata.is_inteam);
       in_team = res.userdata.is_inteam;
       if (in_team) {
         document.getElementById('create_join_section').style.display = "none";
@@ -122,7 +157,7 @@ function loaddata() {
         document.getElementById('team_members_list_section').style.display = "none";
         document.getElementById('create_join_section').style.display = "block";
       }
-      hideAll();    
+      hideAll();
       display_dashboard(res)
     });
 }

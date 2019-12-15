@@ -12,4 +12,13 @@ router
     .post(teamController.jointeam)
 
 
+router
+    .route('/removeteammember')
+    .post(teamController.removeteammember)
+
+router
+    .route('/deletegroup')
+    .post(teamController.deletegroup)
+
+
 module.exports = router;
