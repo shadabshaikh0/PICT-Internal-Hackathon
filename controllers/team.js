@@ -55,15 +55,65 @@ let jointeam = async function (req, res) {
         team_id   : team_code 
     }, function (err, affected, resp) {
         return res.json({
-            doc : doc
+            status : 1
+        });
+    })
+
+}
+let removeteammember = async function (req, res) {
+    let reg_id = req.body.reg_id;
+    let team_code = req.body.team_code;
+
+    const filter = {
+        _id: team_code
+    };
+    const update = {
+        $pull: {
+            team_members: reg_id
+        }
+    };
+    let doc = await Team.findOneAndUpdate(filter, update,{ new:true });
+    
+    let query = {
+        _id: reg_id
+    };
+    User.updateOne(query, {
+        is_inteam : 'false',
+        team_id   : ''
+    }, function (err, affected, resp) {
+        return res.json({
+            status : 1
         });
     })
 
 }
 
+let deletegroup = async function (req, res) {
+    let team_code = req.body.team_code;
+    const filter = {
+        _id: team_code
+    };
+    Team.findOne(filter).then(
+        (doc) => {
+            console.log(doc.team_members)
+            User.updateMany(
+                { _id: { $in: doc.team_members } },
+                { $set: { is_inteam : false, team_id: '', is_teamleader: false  } },
+                {multi: true}
+            ).then(() => {
+                Team.deleteOne(filter).then( () => {
+                    res.json({status : 1})
+                })
+            })
+        }).catch((err) => console.log(err))
+
+}
 
 
 module.exports = {
     createteam: createteam,
-    jointeam: jointeam
+    jointeam: jointeam,
+    removeteammember: removeteammember,
+    deletegroup: deletegroup
+
 }

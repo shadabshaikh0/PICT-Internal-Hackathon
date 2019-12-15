@@ -15,24 +15,6 @@
         if (document.cookie.indexOf('jwt_token') != -1) {
             window.location = '/account/profile'
         }
-
-        function doPost(path) {
-            data = {
-                id: 'C2K17207238',
-                password: '123456'
-            };
-            fetch(path, {
-                    method: 'POST',
-                    body: JSON.stringify(data),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then(res => res.json())
-                .then(function (res) {
-                    console.log(res);
-                });
-        }
     </script>
 </head>
 
