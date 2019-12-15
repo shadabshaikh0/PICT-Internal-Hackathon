@@ -1,9 +1,52 @@
+
+function joinTeam() {
+  let team_code = document.getElementById("team_code_input").value;
+  let reg_id = getCookie('uuid');
+  data = {
+    reg_id: reg_id,
+    team_code: team_code
+  };
+  fetch('http://localhost:8000/team/jointeam', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(function (res) {
+      console.log(res);
+    });
+}
+
+
+function createTeam_and_generateCode() {
+  let team_name = document.getElementById("team_name_input").value;
+
+  let reg_id = getCookie('uuid');
+  data = {
+    team_leaderid: reg_id,
+    team_name: team_name
+  };
+  fetch('http://localhost:8000/team/createteam', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(function (res) {
+      console.log(res);
+      window.location = '/account/profile'
+    });
+}
+
 function delete_cookie(name) {
   document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
 function signout() {
-  console.log('Clck')
   delete_cookie('jwt_token');
   window.location = '/';
 }
@@ -13,16 +56,6 @@ function display_dashboard(payload) {
 
   let userdata = payload.userdata;
   // let teamdata = payload.teamdata;
-
-  // userdata = {
-  //   gravatar: 'https://bulma.io/images/placeholders/128x128.png',
-  //   name: 'Shadab Majid Shaikh',
-  //   _id: 'C39824782738',
-  //   email: 'shadabshaik@gamil.com',
-  //   mobile: '8974573495',
-  //   dept: 'Computer',
-  //   year: 'BE'
-  // }
 
 
   if (userdata.gravatar_url == 'http://www.gravatar.com/avatar/2533554fff89b7aef3f8aff5eef02a0e') {
@@ -80,23 +113,21 @@ function loaddata() {
     })
     .then(res => res.json())
     .then(function (res) {
-      console.log(res);
+      console.log(res.userdata.is_inteam);
+      in_team = res.userdata.is_inteam;
+      if (in_team) {
+        document.getElementById('create_join_section').style.display = "none";
+        document.getElementById('team_members_list_section').style.display = "block";
+      } else {
+        document.getElementById('team_members_list_section').style.display = "none";
+        document.getElementById('create_join_section').style.display = "block";
+      }
+      hideAll();    
       display_dashboard(res)
-
     });
 }
 
 function ready() {
-  // If is part of some team
-  in_team = true
-  if (in_team) {
-    document.getElementById('create_join_section').style.display = "none";
-    document.getElementById('team_members_list_section').style.display = "block";
-  } else {
-    document.getElementById('team_members_list_section').style.display = "none";
-    document.getElementById('create_join_section').style.display = "block";
-  }
-  hideAll();
   loaddata();
 }
 
@@ -113,7 +144,6 @@ function openTab(sectionName, element) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
   tabheaders = document.getElementsByClassName("tab_headers");
-  console.log(tabheaders)
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
     tabheaders[i].classList.remove('is-active');
