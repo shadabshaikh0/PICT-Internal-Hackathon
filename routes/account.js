@@ -21,7 +21,7 @@ router
 router
   .route("/forgot")
   .get(accountController.forgotPasswordPage)
-  .post(accountController.sendMail)
+  .post(accountController.sendForgotMail)
 
 router
   .route("/changePassword")

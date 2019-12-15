@@ -5,9 +5,22 @@ const User = require('../models/User.js')
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
+var handlebars = require('handlebars');
+var fs = require('fs');
 
 const enc_dec = require('../utils/enc_dec');
 
+var readHTMLFile = function(path, callback) {
+    fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
+        if (err) {
+            throw err;
+            callback(err);
+        }
+        else {
+            callback(null, html);
+        }
+    });
+};
 
 let profilePage = function (req, res) {
 	console.log('profilePage')
@@ -38,7 +51,7 @@ function hashID(id) {
 	return reset_link.encryptedData;
 }
 
-let sendMail = async function (req, res) {
+let sendMail = function (email) {
 
 	console.log('send Mail function')
 
@@ -52,8 +65,17 @@ let sendMail = async function (req, res) {
 		}
 	});
 	/// To do : assume already reg students has unique email
+	transport.sendMail(email, function (err, info) {
+		if (err) {
+			console.log(err)
+			console.log("error")
+		} else {
+			console.log("email sent ");
+		}
+	});
+}
 
-	console.log(req.body.email);
+let sendForgotMail = async function (req, res) {
 
 	const user = await User.findOne({
 		email: req.body.email
@@ -73,19 +95,41 @@ let sendMail = async function (req, res) {
 			text: 'Hello' + user.name + '</strong>,<br><br>you recently requested password reset Link. This link is only valid for 30 minutes.',
 			html: 'Hello<strong>' + user.name + '</strong>,<br><br>you recently requested password reset Link. This link is only valid for 30 minutes\n Reset Link ' + reset_link
 		};
-		transport.sendMail(email, function (err, info) {
-			if (err) {
-				console.log(err)
-				console.log("error")
-			} else {
-				console.log("email sent ");
-			}
-		});
+		// Send Mail
+		sendMail(email) ; 
+		return res.redirect('/');
 	}
 	else {
 		return res.send('Error No Mail')
 	}
 }
+
+let sendWelcomeMail = async function (email, user) {
+
+
+	readHTMLFile('./public/emailconfirm.html', function(err, html) {
+		var template = handlebars.compile(html);
+		var replacements = {
+			 username: user.name
+		};
+		var htmlToSend = template(replacements);
+		var email = {
+			from: 'internalhack2020@gmail.com',
+			to: user.email,
+			subject: 'Registration Successfull',
+			//text: 'ested password reset Link. This link is only valid for 30 minutes.',
+			html: htmlToSend
+		};
+		sendMail(email) ; 
+	});
+
+	
+
+	
+	
+	
+}
+
 
 let validateLogin = async function (req, res) {
 	const user = await User.findOne({
@@ -135,6 +179,8 @@ let signUpUser = function (req, res) {
 	new_user.save()
 		.then(() => {
 			console.log('done')
+			let email = { }
+			sendWelcomeMail(email, new_user) ; 
 			return res.redirect('/account/login')
 		})
 }
@@ -159,7 +205,7 @@ let updatePass = async function (req, res) {
 
 	let challenge_id = enc_dec.decrypt(challenge);
 	console.log(challenge_id);
-	
+
 	if (user._id == challenge_id) {
 		User.updateOne({ _id: user._id }, {
 			password: hashedPassword
@@ -176,7 +222,7 @@ module.exports = {
 	signUpPage: signUpPage,
 	signUpUser: signUpUser,
 	forgotPasswordPage: forgotPasswordPage,
-	sendMail: sendMail,
+	sendForgotMail: sendForgotMail,
 	changePasswordPage: changePasswordPage,
 	updatePass: updatePass
 
