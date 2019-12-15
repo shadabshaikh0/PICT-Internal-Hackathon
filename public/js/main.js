@@ -15,7 +15,7 @@ function deletegroup() {
     .then(res => res.json())
     .then(function (res) {
       console.log(res);
-      window.location = "/account/profile"
+      window.location = "/account/profile?tab=team"
     });
 }
 
@@ -37,7 +37,7 @@ function removeMember(memberid) {
     .then(res => res.json())
     .then(function (res) {
       console.log(res);
-      window.location = "/account/profile"
+      window.location = "/account/profile?tab=team"
     });
 }
 
@@ -58,7 +58,7 @@ function joinTeam() {
     .then(res => res.json())
     .then(function (res) {
       console.log(res);
-      window.location = "/account/profile"
+      window.location = "/account/profile?tab=team"
     });
 }
 
@@ -81,7 +81,7 @@ function createTeam_and_generateCode() {
     .then(res => res.json())
     .then(function (res) {
       console.log(res);
-      window.location = '/account/profile'
+      window.location = '/account/profile?tab=team'
     });
 }
 
@@ -165,12 +165,12 @@ function loaddata() {
         document.getElementById('team_members_list_section').style.display = "none";
         document.getElementById('create_join_section').style.display = "block";
       }
-      hideAll();
       display_dashboard(res)
     });
 }
 
 function ready() {
+  hideAll();
   loaddata();
   tabLoad() ; 
 }
@@ -183,6 +183,7 @@ function getGetParam(param){
 
 function tabLoad(){
   let tab_name = getGetParam('tab') ;
+  console.log(tab_name) ;
   openTab('id_section_' + tab_name, document.getElementById(tab_name + '_tab')) ; 
 }
 
@@ -193,7 +194,6 @@ function hideAll() {
   }
   
 }
-
 
 function openTab(sectionName, element) {
   var i, tabcontent, tablinks;
