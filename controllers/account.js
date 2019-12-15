@@ -45,6 +45,23 @@ let loginPage = function (req, res) {
 	});
 }
 
+let renderUpdatePage= function (req, res) {
+	console.log('Update GET REQuest')
+	res.render('update', {
+		title: 'update'
+	});
+}
+
+let saveUpdatePage = function (req, res) {
+
+	const update_user_fields = req.body ;
+	User.updateOne({ _id: update_user_fields._id }, 
+		update_user_fields,
+		function (err, affected, resp) {
+		return res.redirect('/account/profile?tab=profile')
+	});
+}
+
 function hashID(id) {
 	let reset_link = enc_dec.encrypt(id)
 	console.log(reset_link);
@@ -224,6 +241,8 @@ module.exports = {
 	forgotPasswordPage: forgotPasswordPage,
 	sendForgotMail: sendForgotMail,
 	changePasswordPage: changePasswordPage,
-	updatePass: updatePass
+	updatePass: updatePass,
+	renderUpdatePage : renderUpdatePage,
+	saveUpdatePage : saveUpdatePage
 
 }
