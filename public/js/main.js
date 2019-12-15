@@ -127,6 +127,7 @@ function display_dashboard(payload) {
     let teamdata = payload.teamdata;
     let count = 1;
     teamdata.map((team_member) => {
+      document.getElementById('memberimg' + count).src = team_member.gravatar_url
       if ((team_member.is_teamleader === true))
         document.getElementById('membername' + count).innerText = team_member.name + ' ( Team Leader ) ' ;
       else
