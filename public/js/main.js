@@ -151,6 +151,7 @@ function display_dashboard(payload) {
 
   document.getElementById('teamname').innerText = payload.team_name;
   document.getElementById('teamid').innerText = userdata.team_id;
+  document.getElementById('teamid1').value = userdata.team_id;
 }
 
 function getCookie(name) {
