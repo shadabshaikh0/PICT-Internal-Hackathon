@@ -1,3 +1,22 @@
+function getDomain(url, subdomain) {
+  subdomain = subdomain || false;
+
+  url = url.replace(/(https?:\/\/)?(www.)?/i, '');
+
+  if (!subdomain) {
+      url = url.split('.');
+
+      url = url.slice(url.length - 2).join('.');
+  }
+
+  if (url.indexOf('/') !== -1) {
+      return url.split('/')[0];
+  }
+
+  return url;
+}
+
+let API_BASE = window.location.protocol + '://' + getDomain(window.location.href )
 function deletegroup() {
   let team_code = document.getElementById('teamid').innerText;
   let reg_id = getCookie('uuid');
@@ -5,7 +24,7 @@ function deletegroup() {
     reg_id: reg_id,
     team_code: team_code
   };
-  fetch('http://localhost:8000/team/deletegroup', {
+  fetch(API_BASE + '/team/deletegroup', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
@@ -27,7 +46,7 @@ function removeMember(memberid) {
     reg_id: reg_id,
     team_code: team_code
   };
-  fetch('http://localhost:8000/team/removeteammember', {
+  fetch(API_BASE + '/team/removeteammember', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
@@ -48,7 +67,7 @@ function joinTeam() {
     reg_id: reg_id,
     team_code: team_code
   };
-  fetch('http://localhost:8000/team/jointeam', {
+  fetch(API_BASE + '/team/jointeam', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
@@ -71,7 +90,7 @@ function createTeam_and_generateCode() {
     team_leaderid: reg_id,
     team_name: team_name
   };
-  fetch('http://localhost:8000/team/createteam', {
+  fetch(API_BASE + '/team/createteam', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
@@ -167,7 +186,7 @@ function loaddata() {
   data = {
     id: reg_id
   };
-  fetch('http://localhost:8000/fetch/user_dashboard', {
+  fetch(API_BASE + '/fetch/user_dashboard', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
