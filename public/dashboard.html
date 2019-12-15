@@ -92,7 +92,7 @@
                     <span>Profile</span>
                 </a>
             </li>
-            <li class="tab_headers" onclick="openTab('id_section_team', this);">
+            <li id="team_header_id" class="tab_headers" onclick="openTab('id_section_team', this);">
                 <a>
                     <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
                     <span>Team Profile</span>
@@ -196,7 +196,7 @@
                         <div class="field">
                             <label class="label">Enter Team Name</label>
                             <div class="control has-icons-left has-icons-right">
-                                <input class="input is-danger" type="text" placeholder="Enter Team Name">
+                                <input class="input is-danger" id ="team_name_input" type="text" placeholder="Enter Team Name">
                                 <!-- OR is-success -->
                                 </span>
                                 <span class="icon is-small is-left">
@@ -208,13 +208,7 @@
                             </div>
                             <p class="help is-success">This username is available</p> <!-- OR is-danger -->
                         </div>
-                        <button class="button mybutton">Generate Team Invite Code</button><br>
-                        <div class="field">
-                            <label class="label">Team Invite Code</label>
-                            <div class="control">
-                                <input class="input" type="text" placeholder="Copy link from here">
-                            </div>
-                        </div>
+                        <button class="button mybutton" onclick="createTeam_and_generateCode()" >Generate Team Invite Code</button><br>
                     </div>
 
                     <div class="column is-1" style="text-align: center">
@@ -225,10 +219,10 @@
                         <div class="field">
                             <label class="label">Team Invite Code</label>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Paste link here">
+                                <input id ="team_code_input" class="input" type="text" placeholder="Paste Code here">
                             </div>
                         </div>
-                        <button class="button mybutton">Join Team!</button>
+                        <button class="button mybutton" onclick="joinTeam()" >Join Team!</button>
                     </div>
 
                 </div>
