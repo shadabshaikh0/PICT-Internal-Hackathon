@@ -113,12 +113,14 @@ function display_dashboard(payload) {
     teamdata.map((team_member) => {
       document.getElementById('membername' + count).innerText = team_member.name;
       document.getElementById('memberid' + count).innerText = team_member._id;
-      if ((userdata.is_teamleader == true) && (count != 1))
-        document.getElementById('memberbtn' + count).style.display = "block";
+      if (( userdata.is_teamleader === true ))
+        if( team_member.is_teamleader !== true )
+          document.getElementById('memberbtn' + count).style.display = "block";
+      
       count++;
     })
     if ( userdata.is_teamleader == true )
-      document.getElementById('deletegroupbtn').style.display = "block";
+    document.getElementById('deletegroupbtn').style.display = "block";
 
   }
 
