@@ -45,6 +45,7 @@ let createteam = function (req, res) {
     })
 }
 
+
 let jointeam = async function (req, res) {
     let reg_id = req.body.reg_id;
     let team_code = req.body.team_code;
@@ -52,28 +53,37 @@ let jointeam = async function (req, res) {
     const filter = {
         _id: team_code
     };
-    const update = {
-        $push: {
-            team_members: reg_id
+    Team.findOne(filter).then( async (doc) => {
+        console.log(doc.team_members.length)
+        if(doc.team_members.length < 6){
+            const update = {
+                $push: {
+                    team_members: reg_id
+                }
+            };
+            let doc = await Team.findOneAndUpdate(filter, update, {
+                new: true
+            });
+        
+            let query = {
+                _id: reg_id
+            };
+            User.updateOne(query, {
+                is_inteam: 'true',
+                team_id: team_code
+            }, function (err, affected, resp) {
+                return res.json({
+                    status: 1
+                });
+            })
+        } else {
+            return res.json({
+                status: 0
+            });
         }
-    };
-    let doc = await Team.findOneAndUpdate(filter, update, {
-        new: true
-    });
-
-    let query = {
-        _id: reg_id
-    };
-    User.updateOne(query, {
-        is_inteam: 'true',
-        team_id: team_code
-    }, function (err, affected, resp) {
-        return res.json({
-            status: 1
-        });
     })
-
 }
+
 let removeteammember = async function (req, res) {
     let reg_id = req.body.reg_id;
     let team_code = req.body.team_code;

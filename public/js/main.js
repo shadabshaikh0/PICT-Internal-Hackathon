@@ -77,7 +77,12 @@ function joinTeam() {
     .then(res => res.json())
     .then(function (res) {
       console.log(res);
-      window.location = "/account/profile?tab=team"
+      if( res.status == 0 ){
+        alert('Team already has 6 members')
+      }
+      else{
+        window.location = "/account/profile?tab=team"
+      }
     });
 }
 
