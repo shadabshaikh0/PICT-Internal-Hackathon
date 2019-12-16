@@ -80,6 +80,9 @@ function joinTeam() {
       if( res.status == 0 ){
         alert('Team already has 6 members')
       }
+      else if(res.status == 2  ){
+        alert('Invalid team code')        
+      }
       else{
         window.location = "/account/profile?tab=team"
       }
