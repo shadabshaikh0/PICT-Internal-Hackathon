@@ -1,36 +1,24 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
+    <title>Sign Up: iHack2020</title>
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css" />
+    <link rel="stylesheet" href="/css/bulma-checkradio.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/login.css">
     <script>
-        
-        let nameValidator = (thiss) => { 
-           
-            console.log(thiss.value);                        
-            if(thiss.value == 'Suyaa'){
-                console.log('Called');
-                let val = {
-                    state : false,
-                    err : 'Name is not good'
-                }
-                return val ; 
-            }
-            return {
-                state: true
-            }
-        } ; 
-
-        function validation(thiss, validator){
-            status = validator(thiss)
-            console.log(status);
-            
-            if(!status.state){
-                alert(status.err)
+        var check = function () {
+            if (document.getElementById('password').value == document.getElementById('conf_password').value) {
+                document.getElementById('message').style.color = 'green';
+                document.getElementById('message').innerHTML = 'matching';
+                return true;
+            } else {
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').innerHTML = 'not matching';
+                return false;
             }
         }
     </script>
@@ -47,18 +35,20 @@
                         <figure class="avatar">
                             <img src="/images/signup.png" height="30" width="40%">
                         </figure>
-                        <form method="POST" action="/account/signup">
+                        <form onsubmit="return check()" method="POST" action="/account/signup">
                             <div class="field">
                                 <div class="control">
-                                    <input title="" name="name" class="input is-medium" required type="text"
-                                        placeholder="Your Name" style="color: black;font-weight: bold" autofocus="" onblur="validation(this, nameValidator);">
+                                    <input title="Only alphabets are allowed" pattern="[a-zA-Z ]*" name="name"
+                                        class="input is-medium" required type="text" placeholder="Your Name"
+                                        style="color: black;font-weight: bold" autofocus="">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input name="_id" class="input is-medium" required type="text"
-                                        placeholder="PICT Reg ID (C2K , I2K , E2K)"
-                                        style="color: black;font-weight: bold" autofocus="">
+                                    <input title="Enter valid Reg ID" name="_id" class="input is-medium" required
+                                        type="text" placeholder="PICT Reg ID (C2K , I2K , E2K)"
+                                        pattern="^[CcIiEe]2[Kk][0-9]{8}$" style="color: black;font-weight: bold"
+                                        autofocus="">
                                 </div>
                             </div>
 
@@ -72,7 +62,15 @@
                             </div>
 
                             <div><br></div>
-                            <div class="control is-fullwidth">
+
+                            <div class="field">
+                                    <input class="is-checkradio is-info is-medium" id="female" type="radio" name="gender" checked="checked" value="female" >
+                                    <label for="female">Female</label>
+                                    <input class="is-checkradio is-info is-medium" id="male" type="radio" name="gender" value="male">
+                                    <label for="male">Male</label>
+                            </div>
+
+                            <!-- <div class="control is-fullwidth">
                                 <label class="radio">
                                     <input name="gender" type="radio" value="female">
                                     Female
@@ -81,35 +79,39 @@
                                     <input name="gender" type="radio" value="male" checked>
                                     Male
                                 </label>
-                            </div>
+                            </div> -->
                             <div><br></div>
 
                             <div class="field">
                                 <div class="control">
-                                    <input name="email" class="input is-medium" required type="email"
-                                        placeholder="Your Email" style="color: black;font-weight: bold" autofocus="">
+                                    <input title="Enter valid Email" name="email" class="input is-medium" required
+                                        type="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" placeholder="Your Email"
+                                        style="color: black;font-weight: bold" autofocus="">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input name="mobile" class="input is-medium" required type="number"
-                                        placeholder="Your Mobile number" style="color: black;font-weight: bold"
-                                        autofocus="">
+                                    <input title="Enter valid Mobile Number" name="mobile" class="input is-medium"
+                                        required type="text" pattern="[0-9]{10}" placeholder="Your Mobile number"
+                                        style="color: black;font-weight: bold" autofocus="">
                                 </div>
                             </div>
 
                             <div class="field">
                                 <div class="control">
-                                    <input name="password" class="input is-medium" type="password"
+                                    <input title="Enter minimum 6 letters" name="password" id="password"
+                                        class="input is-medium" type="password" pattern=".{6,}"
                                         placeholder="Your Password" style="color: black;font-weight: bold">
                                 </div>
                             </div>
 
                             <div class="field">
                                 <div class="control">
-                                    <input name="conf_password" class="input is-medium" type="password"
+                                    <input title="Enter minimum 6 letters" name="conf_password" id="conf_password"
+                                        pattern=".{6,}" class="input is-medium" type="password"
                                         placeholder="Confirm Password" style="color: black;font-weight: bold">
                                 </div>
+                                <span id='message'></span>
                             </div>
 
                             <div class="field">

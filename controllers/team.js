@@ -54,6 +54,11 @@ let jointeam = async function (req, res) {
         _id: team_code
     };
     Team.findOne(filter).then( async (doc) => {
+        if( !doc ){
+            return res.json({
+                status: 2
+            });
+        }
         console.log(doc.team_members.length)
         if(doc.team_members.length < 6){
             const update = {
