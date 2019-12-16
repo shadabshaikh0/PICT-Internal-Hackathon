@@ -13,3 +13,6 @@ Dashboard:
     4. Remove Notifications and add of notificaitons logo to Navbar
     5. Problem Statements up to navbar
     6. Loader UI
+
+DB:
+    indexing
