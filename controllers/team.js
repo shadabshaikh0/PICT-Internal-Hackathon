@@ -6,12 +6,12 @@ let createteam = function (req, res) {
     let team_leaderid = req.body.team_leaderid;
     let team_name = req.body.team_name;
     const team_invitecode = shortid.generate();
+    
     let namesearch = {
         team_name: team_name
     };
-    Team.count(namesearch, (err,count) => {
-        console.log("****",count);        
-        if (count) {
+    Team.countDocuments(namesearch, (err,count) => {
+        if (count != 0 ) {
             res.json({
                 status: 0
             });
@@ -25,7 +25,7 @@ let createteam = function (req, res) {
             new_team.team_members.push(team_leaderid)
             new_team.save()
                 .then(() => {
-
+                    
                     let query = {
                         _id: team_leaderid
                     };
