@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,21 +8,29 @@
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/login.css">
     <script>
-        function showPassword() {
-            let x = document.getElementById("password");
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
+        
+        let nameValidator = (thiss) => { 
+           
+            console.log(thiss.value);                        
+            if(thiss.value == 'Suyaa'){
+                console.log('Called');
+                let val = {
+                    state : false,
+                    err : 'Name is not good'
+                }
+                return val ; 
             }
-        }
+            return {
+                state: true
+            }
+        } ; 
 
-        function showconfPassword() {
-            let x = document.getElementById("conf_password");
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
+        function validation(thiss, validator){
+            status = validator(thiss)
+            console.log(status);
+            
+            if(!status.state){
+                alert(status.err)
             }
         }
     </script>
@@ -43,8 +50,8 @@
                         <form method="POST" action="/account/signup">
                             <div class="field">
                                 <div class="control">
-                                    <input name="name" class="input is-medium" required type="text"
-                                        placeholder="Your Name" style="color: black;font-weight: bold" autofocus="">
+                                    <input title="" name="name" class="input is-medium" required type="text"
+                                        placeholder="Your Name" style="color: black;font-weight: bold" autofocus="" onblur="validation(this, nameValidator);">
                                 </div>
                             </div>
                             <div class="field">
