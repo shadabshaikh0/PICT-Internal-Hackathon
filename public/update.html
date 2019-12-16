@@ -22,6 +22,11 @@
             document.getElementById('id_email').value = user_data.email;
             document.getElementById('id_mobile').value = user_data.mobile;
         }
+        function check()
+        {
+            alert("Updated successfully");
+            return true;
+        }
     </script>
 </head>
 
@@ -36,7 +41,7 @@
                         <figure class="avatar">
                             <img src="/images/signup.png" height="30" width="40%">
                         </figure>
-                        <form method="POST" action="/account/update" id="update_form">
+                        <form  onsubmit="return check()" method="POST" action="/account/update" id="update_form" >
                             <div class="field">
                                 <div class="control">
                                     <input title="Only alphabets are allowed" pattern="[a-zA-Z ]*" id="id_name"
@@ -118,8 +123,7 @@
 
                             <p class="has-text-grey">
                                 <a href="/account/login">Login</a> &nbsp;·&nbsp;
-                                <a href="/account/forgot">Forgot Password</a> &nbsp;·&nbsp;
-                                <a href="./">Need Help?</a>
+                                <a href="/account/forgot">Forgot Password</a>
                             </p>
                         </div>
                     </div>
