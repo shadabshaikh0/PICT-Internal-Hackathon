@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
  */
 userSchema.pre('save', async function save(next) {
   const user = this;
-  const femaleGravatars = [ "https://image.flaticon.com/icons/png/512/163/163804.png", "https://image.flaticon.com/icons/png/512/145/145852.png", "https://image.flaticon.com/icons/png/512/163/163824.png", "https://image.flaticon.com/icons/png/512/163/163830.png"]
+  const femaleGravatars = [ "https://image.flaticon.com/icons/png/512/163/163811.png", "https://image.flaticon.com/icons/png/512/145/145852.png", "https://image.flaticon.com/icons/png/512/163/163824.png", "https://image.flaticon.com/icons/png/512/163/163830.png", "https://image.flaticon.com/icons/png/512/163/163835.png"]
   const maleGravatars= [ "https://image.flaticon.com/icons/png/512/163/163803.png", "https://image.flaticon.com/icons/png/512/163/163847.png", "https://image.flaticon.com/icons/png/512/163/163801.png", "https://image.flaticon.com/icons/png/512/163/163815.png", "https://image.flaticon.com/icons/png/512/163/163827.png", "https://image.flaticon.com/icons/png/512/163/163825.png" , "https://image.flaticon.com/icons/png/512/163/163834.png" ]  
   console.log(maleGravatars[Math.floor(Math.random()*femaleGravatars.length)]);
   
