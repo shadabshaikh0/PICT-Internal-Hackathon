@@ -127,7 +127,7 @@ let sendWelcomeMail = async function (email, user) {
 		var email = {
 			from: 'internalhack2020@gmail.com',
 			to: user.email,
-			subject: 'Registration Successfull',
+			subject: 'Registration Successful',
 			//text: 'ested password reset Link. This link is only valid for 30 minutes.',
 			html: htmlToSend
 		};
