@@ -12,6 +12,8 @@ const router = express.Router();
 
 // Middleware function
 router.use('/account', validate_auth);
+router.use('/fetch', validate_auth);
+router.use('/team', validate_auth);
 
 router.use("/", rootRoutes)
 router.use("/account", accountRoutes);
