@@ -140,16 +140,24 @@ let validateLogin = async function (req, res) {
 	const user = await User.findOne({
 		_id: req.body.reg_id
 	});
-	if (!user) return res.status(400).json({
-		registered: false
-	});
+	// if (!user) return res.status(400).json({
+	// 	registered: false
+	// });
 	console.log(req.body);
-	
-	const validPass = await bcrypt.compare(req.body.password, user.password);
-	if (!validPass) return res.status(400).json({
-		password: false
-	});
+	if(!user)
+	{
+		return res.redirect('/account/login')
+	}
 
+	const validPass = await bcrypt.compare(req.body.password, user.password);
+	// if (!validPass) return res.status(400).json({
+	// 	password: false
+	// });
+
+	if(!validPass)
+	{
+		return res.redirect('/account/login')
+	}
 	const jwtExpirySeconds = constants.JWT_EXPIRY_SECONDS;
 	const jwt_secret_key = process.env.SESSION_SECRET;
 	payload = {
