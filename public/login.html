@@ -8,6 +8,40 @@
     <title>Login: iHack2020</title>
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script>
+
+
+
+        function sendPostRequest() {
+            let data = {
+                reg_id: document.getElementById('reg_id_id').value,
+                password : document.getElementById('pass_id').value
+            }
+            fetch('/account/login', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(function (res) {
+                    console.log(res);
+                    if(res.problem == 'no_problem'){
+                        window.location = '/account/profile?tab=profile'
+                    }
+                    else  if(res.problem == 'invalid_username'){
+                       alert('Invalid Username: (C2K, I2K , E2K)')
+                    }
+                    else  if(res.problem == 'invalid_password'){
+                       alert("Username and password doesn't match")
+                    }
+                });
+        }
+        
+    </script>
 </head>
 
 <body>
@@ -22,28 +56,31 @@
                         <figure class="avatar">
                             <img src="/images/login.png" height="30" width="40%">
                         </figure>
-                        <form method="POST" action="/account/login">
+                        <form method="POST" id='login-form'>
                             <div class="field">
                                 <div class="control">
-                                    <input title="Enter valid Reg ID " name="reg_id" class="input is-medium" type="text"
-                                        placeholder="PICT Reg ID (C2K, I2K , E2K)"
-                                        pattern="^[CcIiEe]2[Kk][0-9]{8}$" style="color: black;font-weight: bold" autofocus="">
+                                    <input title="Enter valid Reg ID " id="reg_id_id" name="reg_id"
+                                        class="input is-medium" type="text" placeholder="PICT Reg ID (C2K, I2K , E2K)"
+                                        pattern="^[CcIiEe]2[Kk][0-9]{8}$" style="color: black;font-weight: bold"
+                                        autofocus="">
                                 </div>
                             </div>
 
                             <div class="field">
                                 <div class="control">
-                                    <input title="Enter minimum 6 letters" name="password" class="input is-medium" type="password"
-                                    pattern=".{6,}"  placeholder="Your Password" style="color: black;font-weight: bold">
+                                    <input title="Enter minimum 6 letters" id="pass_id" name="password"
+                                        class="input is-medium" type="password" pattern=".{6,}"
+                                        placeholder="Your Password" style="color: black;font-weight: bold">
                                 </div>
                             </div>
-                            <input class="mybutton button is-block is-medium is-fullwidth" type="submit" value="Login" />
+                            <input class="mybutton button is-block is-medium is-fullwidth" type="button"
+                                value="Login" onclick="sendPostRequest();" />
                         </form>
                         <div>
                             <br>
                             <p class="has-text-grey">
                                 <a href="/account/signup">Sign Up</a> &nbsp;·&nbsp;
-                                <a href="/account/forgot">Forgot Password</a> 
+                                <a href="/account/forgot">Forgot Password</a>
                             </p>
                         </div>
                     </div>
