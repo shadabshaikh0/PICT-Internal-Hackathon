@@ -137,17 +137,21 @@ let sendWelcomeMail = async function (email, user) {
 
 
 let validateLogin = async function (req, res) {
+	console.log(req.body);
+	
 	const user = await User.findOne({
 		_id: req.body.reg_id
 	});
-	if (!user) return res.status(400).json({
-		registered: false
+	console.log(user);
+	
+	if (!user) return res.json({
+		problem: 'invalid_username'
 	});
 	console.log(req.body);
 	
 	const validPass = await bcrypt.compare(req.body.password, user.password);
-	if (!validPass) return res.status(400).json({
-		password: false
+	if (!validPass) return res.json({
+		problem: 'invalid_password'
 	});
 
 	const jwtExpirySeconds = constants.JWT_EXPIRY_SECONDS;
@@ -169,8 +173,10 @@ let validateLogin = async function (req, res) {
 	res.cookie(constants.JWT_TOKEN_KEY, generated_token, {
 		maxAge: jwtExpirySeconds * 1000
 	});
-	return res.redirect('/account/profile?tab=profile');
-
+	
+	return res.json({
+		problem: 'no_problem'
+	});
 }
 
 let signUpPage = function (req, res) {
