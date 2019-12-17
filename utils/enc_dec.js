@@ -2,10 +2,7 @@ const crypto = require('crypto');
 
 const algorithm = 'aes-256-cbc';
 
-//const key = process.env.HASH_SECRET ; 
-const key = 'PALLdksjfkljsdflkjsklAVIwertwert'
-
-console.log(key)
+const key = process.env.SESSION_SECRET ; 
 
 const iv = Buffer.alloc(16, 0);
 
