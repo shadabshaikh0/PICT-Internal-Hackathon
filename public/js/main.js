@@ -92,7 +92,6 @@ function joinTeam() {
 
 function createTeam_and_generateCode() {
   let team_name = document.getElementById("team_name_input").value;
-  alert("HEllo")
   let reg_id = getCookie('uuid');
   data = {
     team_leaderid: reg_id,

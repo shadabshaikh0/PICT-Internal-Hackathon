@@ -76,8 +76,8 @@ let sendMail = function (email) {
 		service: 'gmail',
 		// port: 2525,
 		auth: {
-			user: 'internalhack2020@gmail.com',
-			pass: 'internalhack@1'
+			user: process.env.NODEMAILER_EMAIL,
+			pass: process.env.NODEMAILER_PASS
 		}
 	});
 	/// To do : assume already reg students has unique email
