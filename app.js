@@ -1,14 +1,13 @@
 const express = require('express');
-const session = require('express-session');
 const bodyParser = require('body-parser');
 const chalk = require('chalk');
 const dotenv = require('dotenv');
-const MongoStore = require('connect-mongo')(session);
 const path = require('path');
 const mongoose = require('mongoose');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
 const cookieParser = require('cookie-parser')
+
 const upload = multer({
   dest: path.join(__dirname, 'uploads')
 });
@@ -52,18 +51,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(session({
-  resave: true,
-  saveUninitialized: true,
-  secret: process.env.SESSION_SECRET,
-  cookie: {
-    maxAge: 1209600000
-  }, // two weeks in milliseconds
-  store: new MongoStore({
-    url: process.env.MONGODB_URI,
-    autoReconnect: true,
-  })
-}));
 
 
 app.use('/', express.static(path.join(__dirname, '/public'), {
@@ -99,6 +86,7 @@ if (process.env.NODE_ENV === 'development') {
 //   console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env'));
 //   console.log('  Press CTRL-C to stop\n');
 // });
+
 
 
 app.listen(process.env.PORT, () => {
