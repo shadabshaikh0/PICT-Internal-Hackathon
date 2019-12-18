@@ -13,7 +13,6 @@
         function onReady() {
             let user_data = localStorage.getItem('user_info');
             user_data = JSON.parse(user_data)
-            console.log(user_data)
             document.getElementById('id_name').value = user_data.name;
             document.getElementById('id_year').value = user_data.year;
             document.getElementById('id_reg').value = user_data._id;

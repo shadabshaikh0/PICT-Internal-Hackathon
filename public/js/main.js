@@ -33,7 +33,6 @@ function deletegroup() {
     })
     .then(res => res.json())
     .then(function (res) {
-      console.log(res);
       window.location = "/account/profile?tab=team"
     });
 }
@@ -41,7 +40,7 @@ function deletegroup() {
 function removeMember(memberid) {
   let reg_id = document.getElementById(memberid).innerText;
   let team_code = document.getElementById('teamid').value;
-  console.log(reg_id, team_code)
+
   data = {
     reg_id: reg_id,
     team_code: team_code
@@ -55,7 +54,6 @@ function removeMember(memberid) {
     })
     .then(res => res.json())
     .then(function (res) {
-      console.log(res);
       window.location = "/account/profile?tab=team"
     });
 }
@@ -76,7 +74,7 @@ function joinTeam() {
     })
     .then(res => res.json())
     .then(function (res) {
-      console.log(res);
+
       if( res.status == 0 ){
         alert('Team already has 6 members')
       }
@@ -120,29 +118,18 @@ function delete_cookie(name) {
 }
 
 function signout() {
-  console.log('Clck')
   delete_cookie('jwt_token');
   window.location = '/';
 }
 
 function display_dashboard(payload) {
-  console.log(payload);
+
 
   let userdata = payload.userdata;
 
   // Save for later retrieval
   localStorage.setItem('user_info', JSON.stringify(userdata));
-  // let teamdata = payload.teamdata;
 
-  // userdata = {
-  //   gravatar: 'https://bulma.io/images/placeholders/128x128.png',
-  //   name: 'Shadab Majid Shaikh',
-  //   _id: 'C39824782738',
-  //   email: 'shadabshaik@gamil.com',
-  //   mobile: '8974573495',
-  //   dept: 'Computer',
-  //   year: 'BE'
-  // }
 
 
   if (userdata.gravatar_url == 'http://www.gravatar.com/avatar/2533554fff89b7aef3f8aff5eef02a0e') {
@@ -189,7 +176,7 @@ function getCookie(name) {
 
 function loaddata() {
   reg_id = getCookie('uuid');
-  console.log(reg_id);
+
 
   data = {
     id: reg_id
@@ -249,7 +236,7 @@ function getGetParam(param) {
 
 function tabLoad() {
   let tab_name = getGetParam('tab');
-  console.log(tab_name);
+
   openTab('id_section_' + tab_name, document.getElementById(tab_name + '_tab'));
 }
 
@@ -265,7 +252,7 @@ function openTab(sectionName, element) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
   tabheaders = document.getElementsByClassName("tab_headers");
-  console.log(tabheaders)
+
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
     tabheaders[i].classList.remove('is-active');
