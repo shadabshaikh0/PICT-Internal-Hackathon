@@ -1,17 +1,22 @@
 const Team = require('../models/Team.js')
 const shortid = require('shortid');
 const User = require('../models/User.js')
+const sendMail = require('./account').sendMail
+const readHTMLFile = require('./account').readHTMLFile
+var handlebars = require('handlebars');
+var fs = require('fs');
+
 
 let createteam = function (req, res) {
     let team_leaderid = req.body.team_leaderid;
     let team_name = req.body.team_name;
     const team_invitecode = shortid.generate();
-    
+
     let namesearch = {
         team_name: team_name
     };
-    Team.countDocuments(namesearch, (err,count) => {
-        if (count != 0 ) {
+    Team.countDocuments(namesearch, (err, count) => {
+        if (count != 0) {
             res.json({
                 status: 0
             });
@@ -25,7 +30,7 @@ let createteam = function (req, res) {
             new_team.team_members.push(team_leaderid)
             new_team.save()
                 .then(() => {
-                    
+
                     let query = {
                         _id: team_leaderid
                     };
@@ -53,14 +58,16 @@ let jointeam = async function (req, res) {
     const filter = {
         _id: team_code
     };
-    Team.findOne(filter).then( async (doc) => {
-        if( !doc ){
+    Team.findOne(filter).then(async (doc) => {
+        if (!doc) {
             return res.json({
                 status: 2
             });
         }
-        console.log(doc.team_members.length)
-        if(doc.team_members.length < 6){
+        const team_leaderid = doc.team_leaderid;
+        const team_name = doc.team_name;
+        console.log(doc.team_members.length, doc.team_leaderid)
+        if (doc.team_members.length < 6) {
             const update = {
                 $push: {
                     team_members: reg_id
@@ -69,14 +76,35 @@ let jointeam = async function (req, res) {
             let doc = await Team.findOneAndUpdate(filter, update, {
                 new: true
             });
-        
+
             let query = {
                 _id: reg_id
             };
-            User.updateOne(query, {
+            User.findOneAndUpdate(query, {
                 is_inteam: 'true',
                 team_id: team_code
-            }, function (err, affected, resp) {
+            }, { new: true }, function (err, doc) {
+                const joinedMember = doc.name
+                User.findOne({ _id: team_leaderid }).then((team_leader) => {
+                    console.log(team_leader.email, team_leader.name);
+                    readHTMLFile('./public/teamjoinemail.html', function(err, html) {
+                        var template = handlebars.compile(html);
+                        var replacements = {
+                            teamleader : team_leader.name,
+                            teammember : joinedMember,
+                            teamname : team_name
+                        };
+                        var htmlToSend = template(replacements);
+                        var email = {
+                            from: 'internalhack2020@gmail.com',
+                            to: team_leader.email,
+                            subject: joinedMember + ' Joined Team ' + team_name,
+                            html: htmlToSend
+                        };
+                        sendMail(email); 
+                    });
+
+                })
                 return res.json({
                     status: 1
                 });
@@ -163,11 +191,11 @@ let deletegroup = async function (req, res) {
                 new: true
             }).then(() => {
                 User.findOneAndUpdate({
-                        _id: reg_id
-                    }, {
-                        is_inteam: false,
-                        team_id: ''
-                    })
+                    _id: reg_id
+                }, {
+                    is_inteam: false,
+                    team_id: ''
+                })
                     .then(() => res.json({
                         status: 1
                     }));

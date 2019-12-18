@@ -237,6 +237,8 @@ module.exports = {
 	changePasswordPage: changePasswordPage,
 	updatePass: updatePass,
 	renderUpdatePage : renderUpdatePage,
-	saveUpdatePage : saveUpdatePage
+	saveUpdatePage : saveUpdatePage,
+	sendMail : sendMail,
+	readHTMLFile : readHTMLFile
 
 }
