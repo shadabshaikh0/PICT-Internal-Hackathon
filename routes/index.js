@@ -5,6 +5,8 @@ const accountRoutes = require('./account.js');
 const fetchRoutes = require('./fetch.js');
 const teamRoutes = require('./team.js');
 
+// const favicon = require('serve-favicon');
+
 
 const validate_auth = require('../middleware/validate_auth.js')
 
@@ -20,5 +22,6 @@ router.use("/account", accountRoutes);
 router.use("/fetch", fetchRoutes);
 router.use("/team", teamRoutes);
 
+// router.use(favicon('public/images/hacker.ico'));
 
 module.exports = router;
