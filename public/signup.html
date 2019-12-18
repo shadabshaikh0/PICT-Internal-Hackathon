@@ -21,10 +21,33 @@
                 return false;
             }
         }
+        function getGetParam(param) {
+            var url_string = window.location.href
+
+            let key_val = url_string.split('?');
+            key_val.shift();
+
+            let kvmap = {}
+            for (let i = 0; i < key_val.length; i++) {
+                let kv = key_val[i];
+
+                let item = kv.split('=');
+                kvmap[item[0]] = item[1]
+            }
+            return kvmap[param]
+        }
+
+        function onReady(){
+            let reg_error= getGetParam('reg_error');
+            if(reg_error && reg_error == 'true'){
+                alert('Registration ID is already used for registration.\nPlease Login.\nIf you find this activity suspicious contact us via FAQs') ; 
+                window.location = "/account/login"
+            }
+        }
     </script>
 </head>
 
-<body>
+<body onload="onReady();">
     <section class="hero">
         <div class="hero-body">
             <div class="container has-text-centered">
@@ -63,10 +86,12 @@
                             <div><br></div>
 
                             <div class="field">
-                                    <input class="is-checkradio is-info is-medium" id="female" type="radio" name="gender" checked="checked" value="female" >
-                                    <label for="female">Female</label>
-                                    <input class="is-checkradio is-info is-medium" id="male" type="radio" name="gender" value="male">
-                                    <label for="male">Male</label>
+                                <input class="is-checkradio is-info is-medium" id="female" type="radio" name="gender"
+                                    checked="checked" value="female">
+                                <label for="female">Female</label>
+                                <input class="is-checkradio is-info is-medium" id="male" type="radio" name="gender"
+                                    value="male">
+                                <label for="male">Male</label>
                             </div>
 
                             <!-- <div class="control is-fullwidth">

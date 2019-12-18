@@ -10,16 +10,16 @@ var fs = require('fs');
 
 const enc_dec = require('../utils/enc_dec');
 
-var readHTMLFile = function(path, callback) {
-    fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
-        if (err) {
-            throw err;
-            callback(err);
-        }
-        else {
-            callback(null, html);
-        }
-    });
+var readHTMLFile = function (path, callback) {
+	fs.readFile(path, { encoding: 'utf-8' }, function (err, html) {
+		if (err) {
+			throw err;
+			callback(err);
+		}
+		else {
+			callback(null, html);
+		}
+	});
 };
 
 let profilePage = function (req, res) {
@@ -44,7 +44,7 @@ let loginPage = function (req, res) {
 	});
 }
 
-let renderUpdatePage= function (req, res) {
+let renderUpdatePage = function (req, res) {
 	console.log('Update GET REQuest')
 	res.render('update', {
 		title: 'update'
@@ -53,12 +53,12 @@ let renderUpdatePage= function (req, res) {
 
 let saveUpdatePage = function (req, res) {
 
-	const update_user_fields = req.body ;
-	User.updateOne({ _id: update_user_fields._id }, 
+	const update_user_fields = req.body;
+	User.updateOne({ _id: update_user_fields._id },
 		update_user_fields,
 		function (err, affected, resp) {
-		return res.redirect('/account/profile?tab=profile')
-	});
+			return res.redirect('/account/profile?tab=profile')
+		});
 }
 
 function hashID(id) {
@@ -109,7 +109,7 @@ let sendForgotMail = async function (req, res) {
 			html: 'Hello<strong>' + user.name + '</strong>,<br><br>you recently requested password reset Link. This link is only valid for 30 minutes\n Reset Link ' + reset_link
 		};
 		// Send Mail
-		sendMail(email) ; 
+		sendMail(email);
 		return res.redirect('/');
 	}
 	else {
@@ -118,10 +118,10 @@ let sendForgotMail = async function (req, res) {
 }
 
 let sendWelcomeMail = async function (email, user) {
-	readHTMLFile('./public/emailconfirm.html', function(err, html) {
+	readHTMLFile('./public/emailconfirm.html', function (err, html) {
 		var template = handlebars.compile(html);
 		var replacements = {
-			 username: user.name
+			username: user.name
 		};
 		var htmlToSend = template(replacements);
 		var email = {
@@ -131,24 +131,24 @@ let sendWelcomeMail = async function (email, user) {
 			//text: 'ested password reset Link. This link is only valid for 30 minutes.',
 			html: htmlToSend
 		};
-		sendMail(email) ; 
+		sendMail(email);
 	});
 }
 
 
 let validateLogin = async function (req, res) {
 	console.log(req.body);
-	
+
 	const user = await User.findOne({
 		_id: req.body.reg_id
 	});
 	console.log(user);
-	
+
 	if (!user) return res.json({
 		problem: 'invalid_username'
 	});
 	console.log(req.body);
-	
+
 	const validPass = await bcrypt.compare(req.body.password, user.password);
 	if (!validPass) return res.json({
 		problem: 'invalid_password'
@@ -173,7 +173,7 @@ let validateLogin = async function (req, res) {
 	res.cookie(constants.JWT_TOKEN_KEY, generated_token, {
 		maxAge: jwtExpirySeconds * 1000
 	});
-	
+
 	return res.json({
 		problem: 'no_problem'
 	});
@@ -187,13 +187,18 @@ let signUpPage = function (req, res) {
 
 let signUpUser = function (req, res) {
 	const new_user = new User(req.body)
+	
 	new_user.save()
 		.then(() => {
 			console.log('done')
-			let email = { }
-			sendWelcomeMail(email, new_user) ; 
+			let email = {}
+			sendWelcomeMail(email, new_user);
 			return res.redirect('/account/login')
 		})
+		.catch(() => {
+			return res.redirect('/account/signup?reg_error=true')
+		})
+
 }
 let forgotPasswordPage = function (req, res) {
 	console.log('forgotPassword function')
@@ -236,9 +241,9 @@ module.exports = {
 	sendForgotMail: sendForgotMail,
 	changePasswordPage: changePasswordPage,
 	updatePass: updatePass,
-	renderUpdatePage : renderUpdatePage,
-	saveUpdatePage : saveUpdatePage,
-	sendMail : sendMail,
-	readHTMLFile : readHTMLFile
+	renderUpdatePage: renderUpdatePage,
+	saveUpdatePage: saveUpdatePage,
+	sendMail: sendMail,
+	readHTMLFile: readHTMLFile
 
 }
