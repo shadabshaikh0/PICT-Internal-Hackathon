@@ -5,7 +5,7 @@ const constants = require('../constants.js')
 module.exports = function (req, res, next) {
 	console.log('START: ' + req.url)
 
-	if (req.url == '/login' || req.url == '/signup' || req.url.toString().startsWith('/changePassword') || req.url == '/forgot' ) {
+	if (req.url == '/login' || req.url.toString().startsWith('/signup') || req.url.toString().startsWith('/changePassword') || req.url == '/forgot' ) {
 		console.log('EXEMPTED: ' + req.url)
 		return next();
 	}
@@ -23,5 +23,4 @@ module.exports = function (req, res, next) {
 	} else {
 		return res.redirect('/account/login')
 	}
-
 }
