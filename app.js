@@ -13,9 +13,9 @@ const upload = multer({
   dest: path.join(__dirname, 'uploads')
 });
 
-dotenv.config( {
-  path : 'example.env'
-});
+dotenv.config(
+
+);
 
 
 /**
@@ -30,7 +30,7 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useNewUrlParser', true);
 // mongoose.set('useUnifiedTopology', true);
 mongoose.connect(process.env.MONGODB_URI);
-mongoose.connection.on('error', (err) => {
+mongoose.connection.on('error', (rr) => {
   console.error(err);
   console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
   process.exit();
