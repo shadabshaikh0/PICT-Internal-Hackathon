@@ -1,9 +1,7 @@
 const express = require('express');
-const session = require('express-session');
 const bodyParser = require('body-parser');
 const chalk = require('chalk');
 const dotenv = require('dotenv');
-const MongoStore = require('connect-mongo')(session);
 const path = require('path');
 const mongoose = require('mongoose');
 const sass = require('node-sass-middleware');
@@ -52,18 +50,6 @@ app.use(sass({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
-}));
-app.use(session({
-  resave: true,
-  saveUninitialized: true,
-  secret: process.env.SESSION_SECRET,
-  cookie: {
-    maxAge: 1209600000
-  }, // two weeks in milliseconds
-  store: new MongoStore({
-    url: process.env.MONGODB_URI,
-    autoReconnect: true,
-  })
 }));
 
 
