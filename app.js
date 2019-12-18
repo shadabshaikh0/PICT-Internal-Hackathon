@@ -12,7 +12,11 @@ const cookieParser = require('cookie-parser')
 const upload = multer({
   dest: path.join(__dirname, 'uploads')
 });
-dotenv.config();
+
+dotenv.config( {
+  path : 'example.env'
+});
+
 
 /**
  * Create Express server.

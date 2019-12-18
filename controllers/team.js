@@ -87,10 +87,12 @@ let jointeam = async function (req, res) {
                 const joinedMember = doc.name
                 User.findOne({ _id: team_leaderid }).then((team_leader) => {
                     console.log(team_leader.email, team_leader.name);
-                    readHTMLFile('./public/emailconfirm.html', function(err, html) {
+                    readHTMLFile('./public/teamjoinemail.html', function(err, html) {
                         var template = handlebars.compile(html);
                         var replacements = {
-                             username: joinedMember
+                            teamleader : team_leader.name,
+                            teammember : joinedMember,
+                            teamname : team_name
                         };
                         var htmlToSend = template(replacements);
                         var email = {
