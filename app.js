@@ -13,9 +13,7 @@ const upload = multer({
   dest: path.join(__dirname, 'uploads')
 });
 
-dotenv.config(
-
-);
+dotenv.config();
 
 
 /**
