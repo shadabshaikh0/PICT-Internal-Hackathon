@@ -20,7 +20,14 @@
             document.execCommand("copy");
             document.getElementById('display').innerHTML = "Copied!"
         }
-
+   function loadTitle()
+   {
+     let pid = document.getElementById("problemstatementid").value;
+       if(pid == "RA24")
+       {
+        document.getElementById("pstitle").value = "RA24 Title"
+       }
+   }
     </script>
     <style>
         nav.navbar {
@@ -109,8 +116,7 @@
                     <span style="color: #fff;font-weight: bold;font-size: 1em"> iHack </span>
                 </a>
 
-                <span class="navbar-burger burger"
-                    onclick="document.querySelector('.navbar-menu').classList.toggle('is-active');"
+                <span class="navbar-burger burger" onclick="document.querySelector('.navbar-menu').classList.toggle('is-active');"
                     data-target="navbarMenu">
                     <span></span>
                     <span></span>
@@ -239,8 +245,8 @@
                         <div class="field">
                             <label class="label">Enter Team Name</label>
                             <div class="control has-icons-left has-icons-right">
-                                <input class="input is-danger" id="team_name_input" type="text"
-                                    placeholder="Enter Team Name">
+                                <input class="input is-danger" id="team_name_input" type="text" placeholder="Enter Team Name"
+                                    required>
                                 <!-- OR is-success -->
                                 </span>
                                 <span class="icon is-small is-left">
@@ -295,8 +301,7 @@
                         <article class="media">
                             <div class="media-left">
                                 <figure class="image is-24x24">
-                                    <img id="memberimg1" src="https://bulma.io/images/placeholders/128x128.png"
-                                        alt="Image">
+                                    <img id="memberimg1" src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
                                 </figure>
                             </div>
                             <div class="media-content">
@@ -307,9 +312,7 @@
                                 </div>
                             </div>
                             <span id="memberid1" hidden="true">C1</span>
-                            <button id="memberbtn1" style="display: none" class="button is-danger"
-                                onclick="removeMember('memberid1')">Remove</button>
-
+                            <button id="memberbtn1" style="display: none" class="button is-danger" onclick="removeMember('memberid1')">Remove</button>
                         </article>
                     </div>
 
@@ -317,8 +320,7 @@
                         <article class="media">
                             <div class="media-left">
                                 <figure class="image is-24x24">
-                                    <img id="memberimg2" src="https://bulma.io/images/placeholders/128x128.png"
-                                        alt="Image">
+                                    <img id="memberimg2" src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
                                 </figure>
                             </div>
                             <div class="media-content">
@@ -329,16 +331,14 @@
                                 </div>
                             </div>
                             <span id="memberid2" hidden="true">C2</span>
-                            <button id="memberbtn2" style="display: none" class="button is-danger"
-                                onclick="removeMember('memberid2')">Remove</button>
+                            <button id="memberbtn2" style="display: none" class="button is-danger" onclick="removeMember('memberid2')">Remove</button>
                         </article>
                     </div>
                     <div class="box">
                         <article class="media">
                             <div class="media-left">
                                 <figure class="image is-24x24">
-                                    <img id="memberimg3" src="https://bulma.io/images/placeholders/128x128.png"
-                                        alt="Image">
+                                    <img id="memberimg3" src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
                                 </figure>
                             </div>
                             <div class="media-content">
@@ -349,8 +349,7 @@
                                 </div>
                             </div>
                             <span id="memberid3" hidden="true">C3</span>
-                            <button id="memberbtn3" style="display: none" class="button is-danger"
-                                onclick="removeMember('memberid3')">Remove</button>
+                            <button id="memberbtn3" style="display: none" class="button is-danger" onclick="removeMember('memberid3')">Remove</button>
 
                         </article>
                     </div>
@@ -358,8 +357,7 @@
                         <article class="media">
                             <div class="media-left">
                                 <figure class="image is-24x24">
-                                    <img id="memberimg4" src="https://bulma.io/images/placeholders/128x128.png"
-                                        alt="Image">
+                                    <img id="memberimg4" src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
                                 </figure>
                             </div>
                             <div class="media-content">
@@ -370,16 +368,14 @@
                                 </div>
                             </div>
                             <span id="memberid4" hidden="true">C4</span>
-                            <button id="memberbtn4" style="display: none" class="button is-danger"
-                                onclick="removeMember('memberid4')">Remove</button>
+                            <button id="memberbtn4" style="display: none" class="button is-danger" onclick="removeMember('memberid4')">Remove</button>
                         </article>
                     </div>
                     <div class="box">
                         <article class="media">
                             <div class="media-left">
                                 <figure class="image is-24x24">
-                                    <img id="memberimg5" src="https://bulma.io/images/placeholders/128x128.png"
-                                        alt="Image">
+                                    <img id="memberimg5" src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
                                 </figure>
                             </div>
                             <div class="media-content">
@@ -390,16 +386,14 @@
                                 </div>
                             </div>
                             <span id="memberid5" hidden="true">C5</span>
-                            <button id="memberbtn5" style="display: none" class="button is-danger"
-                                onclick="removeMember('memberid5')">Remove</button>
+                            <button id="memberbtn5" style="display: none" class="button is-danger" onclick="removeMember('memberid5')">Remove</button>
                         </article>
                     </div>
                     <div class="box">
                         <article class="media">
                             <div class="media-left">
                                 <figure class="image is-24x24">
-                                    <img id="memberimg6" src="https://bulma.io/images/placeholders/128x128.png"
-                                        alt="Image">
+                                    <img id="memberimg6" src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
                                 </figure>
                             </div>
                             <div class="media-content">
@@ -410,8 +404,7 @@
                                 </div>
                             </div>
                             <span id="memberid6" hidden="true">C6</span>
-                            <button id="memberbtn6" style="display: none" class="button is-danger"
-                                onclick="removeMember('memberid6')">Remove</button>
+                            <button id="memberbtn6" style="display: none" class="button is-danger" onclick="removeMember('memberid6')">Remove</button>
                         </article>
                     </div>
                 </div>
@@ -430,7 +423,53 @@
         </div>
 
         <div class="container tabcontent" id="id_section_teamsubmission">
-            <center><img src="/images/goodidea.jpeg" height="40%" width="30%"></center>
+            <!-- <center><img src="/images/goodidea.jpeg" height="40%" width="30%"></center> -->
+            <center>
+                <div class="column custom_box is-two-fifths">
+                    <div class="field">
+                        <label class="label">Team Name</label>
+                        <div class="control">
+                            <input id="teamname" class="input" type="text" placeholder="Team Name" style="color: black;font-weight: bold"
+                                readonly>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Team Leader ID</label>
+                        <div class="control">
+                            <input id="teamleaderid" class="input" type="text" placeholder="Leader's ID" style="color: black;font-weight: bold"
+                                readonly>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Problem Statement ID</label>
+                        <div class="control">
+                            <input id="problemstatementid" class="input" type="text" placeholder="Problem Statement ID (e.g. RA24) "
+                               onchange="loadTitle()" style="color: black;font-weight: bold">
+                        </div>
+                    </div>
+                   
+                    <div class="field">
+                        <div class="control">
+                            <textarea class="textarea " id="pstitle" placeholder="Problem Statement Title" readonly></textarea>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="file is-centered is-medium ">
+                            <label class="file-label">
+                                <input name="collegeid" class="file-input" type="file" name="resume" required>
+                                <span class="file-cta">
+                                    <span class="file-label">
+                                        Upload PPT
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="button mybutton" onclick="submitSolution()">SUBMIT</button>
+                </div>
+            </center>
         </div>
 
     </section>
@@ -439,13 +478,17 @@
     <script>
         var modal = document.getElementById("myModal");
         var btn = document.getElementById("deletegroupbtn");
+
         var span = document.getElementsByClassName("close")[0];
+
         btn.onclick = function () {
             modal.style.display = "block";
         }
+
         span.onclick = function () {
             modal.style.display = "none";
         }
+
         window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";

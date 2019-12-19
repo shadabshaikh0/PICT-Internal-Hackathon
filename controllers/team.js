@@ -148,12 +148,14 @@ let removeteammember = async function (req, res) {
 }
 
 let deletegroup = async function (req, res) {
+    console.log("sasasasasasasas")
     let team_code = req.body.team_code;
     let reg_id = req.body.reg_id;
     User.findOne({
         _id: reg_id
     }).then((doc) => {
         const is_teamleader = doc.is_teamleader
+        console.log(is_teamleader)
         const filter = {
             _id: team_code
         };
