@@ -90,6 +90,10 @@ function joinTeam() {
 
 function createTeam_and_generateCode() {
   let team_name = document.getElementById("team_name_input").value;
+  if(team_name.length < 3){
+    alert('Team name should be atleast 3 characters long!') ; 
+    return ; 
+  }
   let reg_id = getCookie('uuid');
   data = {
     team_leaderid: reg_id,
