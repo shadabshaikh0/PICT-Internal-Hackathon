@@ -60,6 +60,7 @@ function removeMember(memberid) {
 
 function joinTeam() {
   let team_code = document.getElementById("team_code_input").value;
+  document.getElementById("jointeambtn").disabled = true;
   let reg_id = getCookie('uuid');
   data = {
     reg_id: reg_id,
@@ -74,7 +75,7 @@ function joinTeam() {
     })
     .then(res => res.json())
     .then(function (res) {
-
+      document.getElementById("jointeambtn").disabled = false;  
       if( res.status == 0 ){
         alert('Team already has 6 members')
       }
@@ -84,6 +85,8 @@ function joinTeam() {
       else{
         window.location = "/account/profile?tab=team"
       }
+    }).catch((err) => {
+      document.getElementById("jointeambtn").disabled = false;
     });
 }
 
