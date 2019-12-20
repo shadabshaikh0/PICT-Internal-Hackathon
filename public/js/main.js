@@ -160,14 +160,16 @@ function display_dashboard(payload) {
       else
         document.getElementById('membername' + count).innerText = team_member.name;
       document.getElementById('memberid' + count).innerText = team_member._id;
-      if ((userdata.is_teamleader === true))
-        if (team_member.is_teamleader !== true)
-          document.getElementById('memberbtn' + count).style.display = "block";
+      // if ((userdata.is_teamleader === true))
+      //   if (team_member.is_teamleader !== true)
+      //     document.getElementById('memberbtn' + count).style.display = "block";
+          document.getElementById('memberbtn' + count).style.display = "none";
 
       count++;
     })
-    if (userdata.is_teamleader === true)
-      document.getElementById('deletegroupbtn').innerHTML = "Leave & Delete Team";
+    // if (userdata.is_teamleader === true)
+    //   document.getElementById('deletegroupbtn').innerHTML = "Leave & Delete Team";
+      document.getElementById('deletegroupbtn').style.display = "none";
 
   }
 
