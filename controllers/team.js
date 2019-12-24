@@ -3,38 +3,10 @@ const shortid = require('shortid');
 const User = require('../models/User.js')
 const sendMail = require('./account').sendMail
 const readHTMLFile = require('./account').readHTMLFile
-const handlebars = require('handlebars');
-const firebase = require('firebase')
-const fs = require('fs');
+var handlebars = require('handlebars');
+var fs = require('fs');
 
-let submitsolution = function(req,res){
-    console.log(req.body);
-    
-    const firebaseConfig = {
-        apiKey: "AIzaSyAV62cd_auwNQLFaQQHDNuhVUKi-pEju0c",
-        authDomasin: "ihack2020.firebaseapp.com",
-        databaseURL: "https://ihack2020.firebaseio.com",
-        projectId: "ihack2020",
-        storageBucket: "ihack2020.appspot.com",
-        messagingSenderId: "1028872299919",
-        appId: "1:1028872299919:web:eb6fb9c4f1432b8b1d57fa",
-        measurementId: "G-YP98MJXRY8"
-    };
-    firebase.initializeApp(firebaseConfig);
-    // var storage = firebase.storage();
-    // var storageRef = storage.ref();
 
-    // var bucket = firebase.storage().bucket("my-custom-bucket");
-    // bucket.child("TeamName/" + "PPtSolution").put(file)
-    //             .then(function () {
-    //                 console.log("Document successfully written!");
-    //             })
-    //             .catch(function (error) {
-    //                 console.error("Error writing document: ", error);
-    //             });
-
-    res.json({"result " : 200})
-}
 let createteam = function (req, res) {
     let team_leaderid = req.body.team_leaderid;
     let team_name = req.body.team_name;
@@ -181,14 +153,12 @@ let removeteammember = async function (req, res) {
 }
 
 let deletegroup = async function (req, res) {
-    console.log("sasasasasasasas")
     let team_code = req.body.team_code;
     let reg_id = req.body.reg_id;
     User.findOne({
         _id: reg_id
     }).then((doc) => {
         const is_teamleader = doc.is_teamleader
-        console.log(is_teamleader)
         const filter = {
             _id: team_code
         };
@@ -246,7 +216,6 @@ module.exports = {
     createteam: createteam,
     jointeam: jointeam,
     removeteammember: removeteammember,
-    deletegroup: deletegroup,
-    submitsolution : submitsolution
-  
+    deletegroup: deletegroup
+
 }
