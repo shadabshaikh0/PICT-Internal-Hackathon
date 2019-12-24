@@ -1,11 +1,10 @@
 const AWS = require('aws-sdk');
 const Team = require('../models/Team.js')
-const ID = 'AKIAJMSZADXBLN2ZDLHQ';
-const SECRET = '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';
+
 const BUCKET_NAME = 'pptsubmissions';
 const s3 = new AWS.S3({
-    accessKeyId: ID,
-    secretAccessKey: SECRET
+    accessKeyId: process.env.AWSID,
+    secretAccessKey: process.env.AWSSECRET
 });
 
 let fileUpload = function (req, res) {

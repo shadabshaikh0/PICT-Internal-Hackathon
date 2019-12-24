@@ -18,6 +18,8 @@ function getDomain(url, subdomain) {
 
 let API_BASE = null
 
+let is_teamleader = true;
+
 
 function fileUpload() {
   let team_code = document.getElementById('teamid').value;
@@ -26,18 +28,18 @@ function fileUpload() {
   let file = document.getElementById('ppt').files[0];
 
   let formdata = new FormData();
-  formdata.append("ppt",file)
-  formdata.append("ps_code",ps_code)
-  formdata.append("team_code",team_code)
-  
+  formdata.append("ppt", file)
+  formdata.append("ps_code", ps_code)
+  formdata.append("team_code", team_code)
+
   fetch(API_BASE + '/upload/file', {
       method: 'POST',
-      body:formdata,
+      body: formdata,
     })
     .then(res => res.json())
     .then(function (res) {
       console.log(res);
-      console.log("File uploaded");      
+      console.log("File uploaded");
     });
 
 }
@@ -196,6 +198,7 @@ function display_dashboard(payload) {
 
   }
 
+  document.getElementById('team_name_submission_tab').value = payload.team_name;
   document.getElementById('teamname').innerText = payload.team_name;
   document.getElementById('teamid').value = userdata.team_id;
 }
@@ -222,7 +225,14 @@ function loaddata() {
     })
     .then(res => res.json())
     .then(function (res) {
-      in_team = res.userdata.is_inteam;
+      let in_team = res.userdata.is_inteam;
+      is_teamleader = res.userdata.is_teamleader;
+      if( is_teamleader ){
+          document.getElementById("submitppt").disabled = false;
+      }
+      else{
+        document.getElementById("submitppt").disabled = true;
+      }
       if (in_team) {
         document.getElementById('create_join_section').style.display = "none";
         document.getElementById('team_members_list_section').style.display = "block";
@@ -230,6 +240,7 @@ function loaddata() {
         document.getElementById('team_members_list_section').style.display = "none";
         document.getElementById('create_join_section').style.display = "block";
       }
+
       display_dashboard(res)
     });
 }
