@@ -13,10 +13,15 @@ router
   .get(accountController.loginPage)
   .post(accountController.validateLogin)
 
+// router
+//   .route("/signup")
+//   .get(accountController.signUpPage)
+//   .post(accountController.signUpUser)
 router
   .route("/signup")
-  .get(accountController.signUpPage)
-  .post(accountController.signUpUser)
+  .get(accountController.loginPage)
+  .post(accountController.validateLogin)
+
 
 router
   .route("/update")

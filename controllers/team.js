@@ -92,6 +92,11 @@ let jointeam = async function (req, res) {
                 status: 2
             });
         }
+        if(doc.team_members.includes(reg_id)){
+            return res.json({
+                status: 2
+            });
+        }
         const team_leaderid = doc.team_leaderid;
         const team_name = doc.team_name;
         console.log(doc.team_members.length, doc.team_leaderid)

@@ -60,6 +60,7 @@ function removeMember(memberid) {
 
 function joinTeam() {
   let team_code = document.getElementById("team_code_input").value;
+  document.getElementById("jointeambtn").disabled = true;
   let reg_id = getCookie('uuid');
   data = {
     reg_id: reg_id,
@@ -74,7 +75,7 @@ function joinTeam() {
     })
     .then(res => res.json())
     .then(function (res) {
-
+      document.getElementById("jointeambtn").disabled = false;  
       if( res.status == 0 ){
         alert('Team already has 6 members')
       }
@@ -84,12 +85,18 @@ function joinTeam() {
       else{
         window.location = "/account/profile?tab=team"
       }
+    }).catch((err) => {
+      document.getElementById("jointeambtn").disabled = false;
     });
 }
 
 
 function createTeam_and_generateCode() {
   let team_name = document.getElementById("team_name_input").value;
+  if(team_name.length < 3){
+    alert('Team name should be atleast 3 characters long!') ; 
+    return ; 
+  }
   let reg_id = getCookie('uuid');
   data = {
     team_leaderid: reg_id,
@@ -153,14 +160,16 @@ function display_dashboard(payload) {
       else
         document.getElementById('membername' + count).innerText = team_member.name;
       document.getElementById('memberid' + count).innerText = team_member._id;
-      if ((userdata.is_teamleader === true))
-        if (team_member.is_teamleader !== true)
-          document.getElementById('memberbtn' + count).style.display = "block";
+      // if ((userdata.is_teamleader === true))
+      //   if (team_member.is_teamleader !== true)
+      //     document.getElementById('memberbtn' + count).style.display = "block";
+          document.getElementById('memberbtn' + count).style.display = "none";
 
       count++;
     })
-    if (userdata.is_teamleader === true)
-      document.getElementById('deletegroupbtn').innerHTML = "Leave & Delete Team";
+    // if (userdata.is_teamleader === true)
+    //   document.getElementById('deletegroupbtn').innerHTML = "Leave & Delete Team";
+      document.getElementById('deletegroupbtn').style.display = "none";
 
   }
 
