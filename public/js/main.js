@@ -21,10 +21,14 @@ let API_BASE = null
 
 function fileUpload() {
   let team_code = document.getElementById('teamid').value;
+  let sel = document.getElementById('ps_code');
+  let ps_code = sel.options[sel.selectedIndex].text;
   let file = document.getElementById('ppt').files[0];
 
   let formdata = new FormData();
   formdata.append("ppt",file)
+  formdata.append("ps_code",ps_code)
+  formdata.append("team_code",team_code)
   
   fetch(API_BASE + '/upload/file', {
       method: 'POST',

@@ -28,6 +28,24 @@
         }
     </script>
     <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+    <style>
         nav.navbar {
             background-color: #4A148C;
             font-size: 1.4rem !important;
@@ -437,11 +455,11 @@
         <div class="container tabcontent custom_box" id="id_section_teamsubmission">
 
             <center>
-                <div class >
+                <div class>
                     <label class="label">Team Name</label>
                     <div class="control">
                         <input id="team_name_submission_tab" class="input" type="text" placeholder="Team Name"
-                            style="color: black;font-weight: bold" >
+                            style="color: black;font-weight: bold" readonly >
                     </div>
                 </div>
                 <br>
@@ -449,31 +467,41 @@
 
                     <label class="label">Problem Statement Code</label>
                     <div class="select is-fullwidth">
-                        <select id="ps_code" name="ps_code" onchange="loadTitle();">
-                            <option value="DR111">DR111</option>
-                            <option value="AK12">AK12</option>
-                            <option value="AG50">AG50</option>
+                        <select id="ps_code" name="ps_code" onchange="loadTitle();" required>
+                            <option value="Alumni Tracking System.">DR111</option>
+                            <option value="An Mobile based Inventory Management System using QR code application.">AK12
+                            </option>
+                            <option value="Smart Management of Food Storage and Waste Reduction.">AG50</option>
                             <option value="Better and faster emergency care during accidents and vehicle impact.">RA25
                             </option>
-                            <option value="CK107">CK107</option>
-                            <option value="AP63">AP63</option>
-                            <option value="NM378">NM378</option>
+                            <option value="Video based dynamic human authentication system for access control.">CK107
+                            </option>
+                            <option
+                                value="Design an app to write formatted prescriptions based on dictation from doctor. Refer attachment for more detail. The app should provide facility to sign the prescription and also send to the patient directly on his phone and email id. The method of storing the medical records (EHR) should follow relevant compliance laws like HIPAA.">
+                                AP63</option>
+                            <option value="AI based crop identification mobile app.">NM378</option>
                             <option
                                 value="Helping the farmers in terms of Crop suggestion, precautions based on the met department forecast of rain fall / weather, potential  pest attacks , weather warnings etc.">
                                 RA28</option>
-                            <option value="SS45">SS45</option>
-                            <option value="AM289">AM289</option>
-                            <option value="NM396">NM396</option>
-                            <option value="NM404">NM404</option>
-                            <option value="AM291">AM291</option>
+                            <option
+                                value="Leveraging block chain technology for creation of Electronic Health Record (EHR).">
+                                SS45</option>
+                            <option value="Atithi Devo Bhava.">AM289</option>
+                            <option value="Sentiment Analysis from text feedback.">NM396</option>
+                            <option value="Size Invariant Ship detection from SAR Images.">NM404</option>
+                            <option value="	Mid-Day Meal Analytics">AM291</option>
                             <option
                                 value="Insurance companies regularly gets health check reports submitted by potential buyers of insurance. We need a way to digitize different kinds of printed lab reports / health check reports to discrete values of each parameter captured. Conversion to a standardized set of digitized value will help in automating lot of backend approval process. Ability to read and classify comments/observations for common parameters will be a big plusWhen a customer is uploading his health check report regularly, then also a trend chart can be plotted for key parameters. Few sample reports will be provided to the participating teams. Test will be based on that as well as unknown set of health check reports post completion.">
                                 VA47</option>
-                            <option value="DR112">DR112</option>
+                            <option value="	Pothole Challenge.">DR112</option>
                             <option value="Portal for Farmers to sell the produce at a better rate.">RA27</option>
-                            <option value="AS118">AS118</option>
-                            <option value="CK139">CK139</option>
-                            <option value="NM392">NM392</option>
+                            <option
+                                value="Positive psychology games (Mobile/Computer) which help develop a. Respect for right and dignity of women and child b. which help promote objective of Beti Bachao Beti Padao(BBBP).">
+                                AS118</option>
+                            <option value="Indoor Navigation App.">CK139</option>
+                            <option
+                                value="Depth Estimation of Valles Marineris using ISRO’s Mars Color Camera (MCC) images.">
+                                NM392</option>
 
                         </select>
                     </div>
@@ -485,26 +513,24 @@
                         <textarea class="textarea " id="pstitle" placeholder="Problem Statement Title"
                             readonly></textarea>
                     </div>
-                </div>
 
-                <div class="field">
-                    <div class="file is-centered is-medium  ">
-                        <label class="file-label">
-                            <input id="ppt" class="file-input" type="file" name="ppt" accept="application/pdf" required>
-                            <span class="file-cta">
-                                <span class="file-label">
-                                    Upload PPT
+                    <div class="field">
+                        <div class="file is-centered is-medium  ">
+                            <label class="file-label">
+                                <input id="ppt" class="file-input" type="file" name="ppt" accept="application/pdf"
+                                    required>
+                                <span class="file-cta">
+                                    <span class="file-label">
+                                        Upload PPT
+                                    </span>
                                 </span>
-                            </span>
-                        </label>
+                            </label>
+                        </div>
                     </div>
+                    <br>
+                    <button class="mybutton button is-centered is-medium" onclick="fileUpload()">Submit PPT</button>
                 </div>
-                <br>
-                <button class="mybutton button is-block is-medium "
-                    onclick="fileUpload()">Submit PPT</button>
-
-        </div>
-        </center>
+            </center>
         </div>
 
     </section>
