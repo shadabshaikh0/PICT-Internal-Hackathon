@@ -12,7 +12,8 @@ const teamSchema = new mongoose.Schema({
   female_count:String,
   team_invitecode:String
 }, {
-  timestamps: true
+  timestamps: true,
+  strict: false 
 });
 
 const Team = mongoose.model('Team', teamSchema);

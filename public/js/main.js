@@ -36,6 +36,7 @@ function fileUpload() {
     })
     .then(res => res.json())
     .then(function (res) {
+      console.log(res);
       console.log("File uploaded");      
     });
 
