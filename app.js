@@ -7,6 +7,8 @@ const mongoose = require('mongoose');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
 const cookieParser = require('cookie-parser')
+const fileUpload = require('express-fileupload');
+
 
 const upload = multer({
   dest: path.join(__dirname, 'uploads')
@@ -51,6 +53,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
+app.use(fileUpload());
 
 
 app.use('/', express.static(path.join(__dirname, '/public'), {

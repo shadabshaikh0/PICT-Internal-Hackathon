@@ -12,6 +12,12 @@
     <script src="/js/main.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/landing.css">
     <script>
+        function loadTitle() {
+            var a = (document.getElementById("ps_code").value);
+
+            document.getElementById("pstitle").value = a;
+        }
+
         function copyinvitecode() {
 
             var copyText = document.getElementById("teamid");
@@ -20,7 +26,6 @@
             document.execCommand("copy");
             document.getElementById('display').innerHTML = "Copied!"
         }
-
     </script>
     <style>
         nav.navbar {
@@ -47,6 +52,7 @@
             padding: 7% 10%;
             text-align: center;
         }
+
 
         .inlineit div {
             display: inline-block;
@@ -226,9 +232,9 @@
                 </div>
 
             </div>
-            <!-- <center>
+            <center>
                 <button class="button mybutton" onclick="window.location.href='update'">Update Profile</button>
-            </center> -->
+            </center>
 
         </div>
 
@@ -240,7 +246,7 @@
                             <label class="label">Enter Team Name</label>
                             <div class="control has-icons-left has-icons-right">
                                 <input class="input is-danger" id="team_name_input" type="text"
-                                    placeholder="Enter Team Name" required >
+                                    placeholder="Enter Team Name" required>
                                 <!-- OR is-success -->
                                 </span>
                                 <span class="icon is-small is-left">
@@ -267,7 +273,7 @@
                                 <input id="team_code_input" class="input" type="text" placeholder="Paste Code here">
                             </div>
                         </div>
-                        <button class="button mybutton" id="jointeambtn" onclick="joinTeam()">Join Team!</button>
+                        <button class="button mybutton" onclick="joinTeam()">Join Team!</button>
                     </div>
 
                 </div>
@@ -309,7 +315,6 @@
                             <span id="memberid1" hidden="true">C1</span>
                             <button id="memberbtn1" style="display: none" class="button is-danger"
                                 onclick="removeMember('memberid1')">Remove</button>
-
                         </article>
                     </div>
 
@@ -429,8 +434,77 @@
 
         </div>
 
-        <div class="container tabcontent" id="id_section_teamsubmission">
-            <center><img src="/images/goodidea.jpeg" height="40%" width="30%"></center>
+        <div class="container tabcontent custom_box" id="id_section_teamsubmission">
+
+            <center>
+                <div class >
+                    <label class="label">Team Name</label>
+                    <div class="control">
+                        <input id="team_name_submission_tab" class="input" type="text" placeholder="Team Name"
+                            style="color: black;font-weight: bold" >
+                    </div>
+                </div>
+                <br>
+                <div>
+
+                    <label class="label">Problem Statement Code</label>
+                    <div class="select is-fullwidth">
+                        <select id="ps_code" name="ps_code" onchange="loadTitle();">
+                            <option value="DR111">DR111</option>
+                            <option value="AK12">AK12</option>
+                            <option value="AG50">AG50</option>
+                            <option value="Better and faster emergency care during accidents and vehicle impact.">RA25
+                            </option>
+                            <option value="CK107">CK107</option>
+                            <option value="AP63">AP63</option>
+                            <option value="NM378">NM378</option>
+                            <option
+                                value="Helping the farmers in terms of Crop suggestion, precautions based on the met department forecast of rain fall / weather, potential  pest attacks , weather warnings etc.">
+                                RA28</option>
+                            <option value="SS45">SS45</option>
+                            <option value="AM289">AM289</option>
+                            <option value="NM396">NM396</option>
+                            <option value="NM404">NM404</option>
+                            <option value="AM291">AM291</option>
+                            <option
+                                value="Insurance companies regularly gets health check reports submitted by potential buyers of insurance. We need a way to digitize different kinds of printed lab reports / health check reports to discrete values of each parameter captured. Conversion to a standardized set of digitized value will help in automating lot of backend approval process. Ability to read and classify comments/observations for common parameters will be a big plusWhen a customer is uploading his health check report regularly, then also a trend chart can be plotted for key parameters. Few sample reports will be provided to the participating teams. Test will be based on that as well as unknown set of health check reports post completion.">
+                                VA47</option>
+                            <option value="DR112">DR112</option>
+                            <option value="Portal for Farmers to sell the produce at a better rate.">RA27</option>
+                            <option value="AS118">AS118</option>
+                            <option value="CK139">CK139</option>
+                            <option value="NM392">NM392</option>
+
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="field">
+                    <label class="label">Problem Statement Title</label>
+                    <div class="control">
+                        <textarea class="textarea " id="pstitle" placeholder="Problem Statement Title"
+                            readonly></textarea>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="file is-centered is-medium  ">
+                        <label class="file-label">
+                            <input id="ppt" class="file-input" type="file" name="ppt" accept="application/pdf" required>
+                            <span class="file-cta">
+                                <span class="file-label">
+                                    Upload PPT
+                                </span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <br>
+                <button class="mybutton button is-block is-medium "
+                    onclick="fileUpload()">Submit PPT</button>
+
+        </div>
+        </center>
         </div>
 
     </section>
@@ -439,13 +513,17 @@
     <script>
         var modal = document.getElementById("myModal");
         var btn = document.getElementById("deletegroupbtn");
+
         var span = document.getElementsByClassName("close")[0];
+
         btn.onclick = function () {
             modal.style.display = "block";
         }
+
         span.onclick = function () {
             modal.style.display = "none";
         }
+
         window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
