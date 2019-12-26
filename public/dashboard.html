@@ -14,7 +14,6 @@
     <script>
         function loadTitle() {
             var a = (document.getElementById("ps_code").value);
-
             document.getElementById("pstitle").value = a;
         }
 
@@ -258,9 +257,9 @@
                 </div>
 
             </div>
-            <center>
+            <!-- <center>
                 <button class="button mybutton" onclick="window.location.href='update'">Update Profile</button>
-            </center>
+            </center> -->
 
         </div>
 
@@ -495,6 +494,7 @@
                         <div class="select is-fullwidth">
                             <select id="ps_code" name="ps_code" onchange="loadTitle();" required>
                                 <option value=""> Select Problem Statement Code </option>
+                                <option value="Student Innovation">Student Innovation </option>
                                 <option value="Alumni Tracking System.">DR111</option>
 
                                 <option value="An Mobile based Inventory Management System using QR code application.">
@@ -560,7 +560,8 @@
                         </div>
                     </div>
                     <br>
-                    <button id="submitppt" class="mybutton button is-centered is-medium" onclick="fileUpload()">Submit PPT</button>
+                    <button id="submitppt" class="mybutton button is-centered is-medium" onclick="fileUpload()">Submit
+                        PPT</button>
                 </center>
             </div>
 
