@@ -38,8 +38,9 @@ function fileUpload() {
     })
     .then(res => res.json())
     .then(function (res) {
-      console.log(res);
       console.log("File uploaded");
+      alert("File Uploaded");
+      window.location.reload();
     });
 
 }
@@ -211,8 +212,6 @@ function getCookie(name) {
 
 function loaddata() {
   reg_id = getCookie('uuid');
-
-
   data = {
     id: reg_id
   };
@@ -227,8 +226,22 @@ function loaddata() {
     .then(function (res) {
       let in_team = res.userdata.is_inteam;
       is_teamleader = res.userdata.is_teamleader;
+      let ppt_url = res.ppt_url;
+      let ps_code = res.ps_code;
       if( is_teamleader ){
           document.getElementById("submitppt").disabled = false;
+          if(ppt_url){
+            document.getElementById("prev_submission").style.display = "block";
+            let dd = document.getElementById('ps_code');
+            for (var i = 0; i < dd.options.length; i++) {
+                if (dd.options[i].text === ps_code) {
+                    dd.selectedIndex = i;
+                    break;
+                }
+            }
+            dd.onchange();
+            document.getElementById("prev_submission").href = ppt_url;
+          }    
       }
       else{
         document.getElementById("submitppt").disabled = true;

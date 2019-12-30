@@ -475,6 +475,9 @@
                     <li>
                         4. Only team leader can submit PPT.
                     </li>
+                    <li>
+                        5. Convert the PPT to PDF before Submission.( Those who have already submitted in PPTX format, kindly resumbit in PDF. )
+                    </li>
                 </ul>
             </div>
             <div class="custom_box">
@@ -493,10 +496,9 @@
                         <label class="label">Problem Statement Code</label>
                         <div class="select is-fullwidth">
                             <select id="ps_code" name="ps_code" onchange="loadTitle();" required>
-                                <option value=""> Select Problem Statement Code </option>
+                                
                                 <option value="Student Innovation">Student Innovation </option>
                                 <option value="Alumni Tracking System.">DR111</option>
-
                                 <option value="An Mobile based Inventory Management System using QR code application.">
                                     AK12
                                 </option>
@@ -546,8 +548,10 @@
                         </div>
                     </div>
                     <br>
+                    <a id="prev_submission" style="display: none" href="#">View Previous Submission</a>
+                    <br>
                     <div class="field">
-                        <div class="file is-centered is-medium  ">
+                        <div class="file is-centered is-medium">
                             <label class="file-label">
                                 <input id="ppt" class="file-input" type="file" name="ppt" accept="application/pdf"
                                     required>
