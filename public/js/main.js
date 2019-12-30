@@ -229,7 +229,7 @@ function loaddata() {
       let ppt_url = res.ppt_url;
       let ps_code = res.ps_code;
       if( is_teamleader ){
-          document.getElementById("submitppt").disabled = false;
+          document.getElementById("submitppt").disabled = true;
           if(ppt_url){
             document.getElementById("prev_submission").style.display = "block";
             let dd = document.getElementById('ps_code');
