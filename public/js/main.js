@@ -4,19 +4,46 @@ function getDomain(url, subdomain) {
   url = url.replace(/(https?:\/\/)?(www.)?/i, '');
 
   if (!subdomain) {
-      url = url.split('.');
+    url = url.split('.');
 
-      url = url.slice(url.length - 2).join('.');
+    url = url.slice(url.length - 2).join('.');
   }
 
   if (url.indexOf('/') !== -1) {
-      return url.split('/')[0];
+    return url.split('/')[0];
   }
 
   return url;
 }
 
 let API_BASE = null
+
+let is_teamleader = true;
+
+
+function fileUpload() {
+  let team_code = document.getElementById('teamid').value;
+  let sel = document.getElementById('ps_code');
+  let ps_code = sel.options[sel.selectedIndex].text;
+  let file = document.getElementById('ppt').files[0];
+
+  let formdata = new FormData();
+  formdata.append("ppt", file)
+  formdata.append("ps_code", ps_code)
+  formdata.append("team_code", team_code)
+
+  fetch(API_BASE + '/upload/file', {
+      method: 'POST',
+      body: formdata,
+    })
+    .then(res => res.json())
+    .then(function (res) {
+      console.log(res);
+      console.log("File uploaded");
+    });
+
+}
+
 function deletegroup() {
   let team_code = document.getElementById('teamid').value;
   let reg_id = getCookie('uuid');
@@ -75,14 +102,12 @@ function joinTeam() {
     })
     .then(res => res.json())
     .then(function (res) {
-      document.getElementById("jointeambtn").disabled = false;  
-      if( res.status == 0 ){
+      document.getElementById("jointeambtn").disabled = false;
+      if (res.status == 0) {
         alert('Team already has 6 members')
-      }
-      else if(res.status == 2  ){
-        alert('Invalid team code')        
-      }
-      else{
+      } else if (res.status == 2) {
+        alert('Invalid team code')
+      } else {
         window.location = "/account/profile?tab=team"
       }
     }).catch((err) => {
@@ -93,9 +118,9 @@ function joinTeam() {
 
 function createTeam_and_generateCode() {
   let team_name = document.getElementById("team_name_input").value;
-  if(team_name.length < 3){
-    alert('Team name should be atleast 3 characters long!') ; 
-    return ; 
+  if (team_name.length < 3) {
+    alert('Team name should be atleast 3 characters long!');
+    return;
   }
   let reg_id = getCookie('uuid');
   data = {
@@ -163,16 +188,17 @@ function display_dashboard(payload) {
       // if ((userdata.is_teamleader === true))
       //   if (team_member.is_teamleader !== true)
       //     document.getElementById('memberbtn' + count).style.display = "block";
-          document.getElementById('memberbtn' + count).style.display = "none";
+      document.getElementById('memberbtn' + count).style.display = "none";
 
       count++;
     })
     // if (userdata.is_teamleader === true)
     //   document.getElementById('deletegroupbtn').innerHTML = "Leave & Delete Team";
-      document.getElementById('deletegroupbtn').style.display = "none";
+    document.getElementById('deletegroupbtn').style.display = "none";
 
   }
 
+  document.getElementById('team_name_submission_tab').value = payload.team_name;
   document.getElementById('teamname').innerText = payload.team_name;
   document.getElementById('teamid').value = userdata.team_id;
 }
@@ -199,7 +225,14 @@ function loaddata() {
     })
     .then(res => res.json())
     .then(function (res) {
-      in_team = res.userdata.is_inteam;
+      let in_team = res.userdata.is_inteam;
+      is_teamleader = res.userdata.is_teamleader;
+      if( is_teamleader ){
+          document.getElementById("submitppt").disabled = false;
+      }
+      else{
+        document.getElementById("submitppt").disabled = true;
+      }
       if (in_team) {
         document.getElementById('create_join_section').style.display = "none";
         document.getElementById('team_members_list_section').style.display = "block";
@@ -207,12 +240,13 @@ function loaddata() {
         document.getElementById('team_members_list_section').style.display = "none";
         document.getElementById('create_join_section').style.display = "block";
       }
+
       display_dashboard(res)
     });
 }
 
 function ready() {
-  API_BASE =  window.location.href.split(':')[0] + '://' + getDomain(window.location.href, true)
+  API_BASE = window.location.href.split(':')[0] + '://' + getDomain(window.location.href, true)
   loadBot();
   hideAll();
   loaddata();
