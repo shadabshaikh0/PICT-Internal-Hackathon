@@ -14,7 +14,11 @@ let load_user_dashboard = async function (req, res) {
         })
         .then(doc => {
             const teamname = doc.team_name;
-            user.team_name = teamname
+            const ppt_url = doc.ppt_url;
+            const ps_code = doc.ps_code;
+            user.team_name = teamname;
+            user.ppt_url = ppt_url;
+            user.ps_code = ps_code;
             User.find({'_id': { $in: doc.team_members }})
                 .then((doc) => { 
                     user.teamdata = doc;

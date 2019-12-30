@@ -10,7 +10,9 @@ const teamSchema = new mongoose.Schema({
   team_leaderid:String,
   team_members: [{ type : String, ref: 'User' }],
   female_count:String,
-  team_invitecode:String
+  team_invitecode:String,
+  ppt_url : String,
+  ps_code : String
 }, {
   timestamps: true,
   strict: false 
