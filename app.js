@@ -63,10 +63,43 @@ app.use('/', express.static(path.join(__dirname, '/public'), {
 app.use('/public/js', express.static(path.join(__dirname, '/public/js/'), {
   maxAge: 31557600000
 }));
-
 /**
  * Primary app routes.
  */
+
+// const Team = require('./models/Team.js')
+// const sendMail = require('./controllers/account').sendMail
+// const readHTMLFile = require('./controllers/account').readHTMLFile
+// var handlebars = require('handlebars');
+// var fs = require('fs');
+// Team.find({ 'ppt_url' : { $exists : true }, 'team_members' : { $size : 6 } }).sort({'createdAt':1}).limit(70).then( res => {
+//   console.log(res,res.length);
+//   let mentors = [ "rekkawars111@gmail.com", "shubhamrekkawar755@gmail.com" , "srekka107@gmail.com", "sairajsawant30@gmail.com","pictassistant@gmail.com"]
+//   let k = 0;
+//   for ( let j = 0 ; j < mentors.length ;j++) {
+//   readHTMLFile('./public/eval.html', function(err, html) {
+//   var template = handlebars.compile(html);
+//   let replacements = {}    
+//     for(let i = 0 ; i < 10; i++) {
+//       replacements['team_id' + i] = res[k]._id ;
+//       replacements['url' + i] = res[k].ppt_url ;   
+//       replacements['pscode' + i] = res[k].ps_code;   
+//       k++;
+//     }
+//     console.log(k);
+//     var htmlToSend = template(replacements);
+//     var email = {
+//         from: 'internalhack2020@gmail.com',
+//         to: mentors[j],
+//         subject: "SIH2020 Internal Hackathon PPT Evaluation",
+//         html: htmlToSend
+//     };
+//     sendMail(email); 
+//   });
+// }
+// }).catch( err =>{
+//   console.log(err);
+// });
 
 app.use(cookieParser())
 

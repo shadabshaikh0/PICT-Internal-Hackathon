@@ -257,7 +257,6 @@ function loaddata() {
       display_dashboard(res)
     });
 }
-
 function ready() {
   API_BASE = window.location.href.split(':')[0] + '://' + getDomain(window.location.href, true)
   loadBot();
