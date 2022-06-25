@@ -1,2 +1,2 @@
-# PICT Internal Hackathon WebApp
+# Internal Hackathon WebApp
 > Live here - https://ihack2020.herokuapp.com/
