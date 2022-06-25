@@ -29,7 +29,7 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useNewUrlParser', true);
 // mongoose.set('useUnifiedTopology', true);
 mongoose.connect(process.env.MONGODB_URI);
-mongoose.connection.on('error', (rr) => {
+mongoose.connection.on('error', (err) => {
   console.error(err);
   console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
   process.exit();
@@ -66,41 +66,6 @@ app.use('/public/js', express.static(path.join(__dirname, '/public/js/'), {
 /**
  * Primary app routes.
  */
-
-// const Team = require('./models/Team.js')
-// const sendMail = require('./controllers/account').sendMail
-// const readHTMLFile = require('./controllers/account').readHTMLFile
-// var handlebars = require('handlebars');
-// var fs = require('fs');
-// Team.find({ 'ppt_url' : { $exists : true }, 'team_members' : { $size : 6 } }).sort({'createdAt':1}).limit(70).then( res => {
-//   console.log(res,res.length);
-//   let mentors = [ "rekkawars111@gmail.com", "shubhamrekkawar755@gmail.com" , "srekka107@gmail.com", "sairajsawant30@gmail.com","pictassistant@gmail.com"]
-//   let k = 0;
-//   for ( let j = 0 ; j < mentors.length ;j++) {
-//   readHTMLFile('./public/eval.html', function(err, html) {
-//   var template = handlebars.compile(html);
-//   let replacements = {}    
-//     for(let i = 0 ; i < 10; i++) {
-//       replacements['team_id' + i] = res[k]._id ;
-//       replacements['url' + i] = res[k].ppt_url ;   
-//       replacements['pscode' + i] = res[k].ps_code;   
-//       k++;
-//     }
-//     console.log(k);
-//     var htmlToSend = template(replacements);
-//     var email = {
-//         from: 'internalhack2020@gmail.com',
-//         to: mentors[j],
-//         subject: "SIH2020 Internal Hackathon PPT Evaluation",
-//         html: htmlToSend
-//     };
-//     sendMail(email); 
-//   });
-// }
-// }).catch( err =>{
-//   console.log(err);
-// });
-
 app.use(cookieParser())
 
 const routes = require('./routes');
@@ -115,16 +80,6 @@ if (process.env.NODE_ENV === 'development') {
     res.status(500).send('Server Error');
   });
 }
-
-/**
- * Start Express server.
- */
-// app.listen(app.get('port'), () => {
-//   console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env'));
-//   console.log('  Press CTRL-C to stop\n');
-// });
-
-
 
 app.listen(process.env.PORT, () => {
   console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env'));

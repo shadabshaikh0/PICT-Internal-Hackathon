@@ -72,15 +72,12 @@ let sendMail = function (email) {
 	console.log('send Mail function')
 
 	let transport = nodemailer.createTransport({
-		// host: 'smtp.mailtrap.io',
 		service: 'gmail',
-		// port: 2525,
 		auth: {
 			user: process.env.NODEMAILER_EMAIL,
 			pass: process.env.NODEMAILER_PASS
 		}
 	});
-	/// To do : assume already reg students has unique email
 	transport.sendMail(email, function (err, info) {
 		if (err) {
 			console.log(err)
@@ -108,7 +105,6 @@ let sendForgotMail = async function (req, res) {
 			text: 'Hello' + user.name + '</strong>,<br><br>you recently requested password reset Link. This link is only valid for 30 minutes.',
 			html: 'Hello<strong>' + user.name + '</strong>,<br><br>you recently requested password reset Link. This link is only valid for 30 minutes\n Reset Link ' + reset_link
 		};
-		// Send Mail
 		sendMail(email);
 		return res.redirect('/');
 	}
@@ -128,7 +124,6 @@ let sendWelcomeMail = async function (email, user) {
 			from: 'internalhack2020@gmail.com',
 			to: user.email,
 			subject: 'Registration Successful',
-			//text: 'ested password reset Link. This link is only valid for 30 minutes.',
 			html: htmlToSend
 		};
 		sendMail(email);
@@ -138,17 +133,14 @@ let sendWelcomeMail = async function (email, user) {
 
 let validateLogin = async function (req, res) {
 	console.log(req.body);
-
 	const user = await User.findOne({
 		_id: req.body.reg_id
 	});
 	console.log(user);
-
 	if (!user) return res.json({
 		problem: 'invalid_username'
 	});
 	console.log(req.body);
-
 	const validPass = await bcrypt.compare(req.body.password, user.password);
 	if (!validPass) return res.json({
 		problem: 'invalid_password'
@@ -226,7 +218,6 @@ let updatePass = async function (req, res) {
 		User.updateOne({ _id: user._id }, {
 			password: hashedPassword
 		}, function (err, affected, resp) {
-			//console.log(resp);
 			return res.redirect('/account/login')
 		});
 	}
@@ -245,5 +236,4 @@ module.exports = {
 	saveUpdatePage: saveUpdatePage,
 	sendMail: sendMail,
 	readHTMLFile: readHTMLFile
-
 }

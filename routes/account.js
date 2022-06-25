@@ -13,10 +13,6 @@ router
   .get(accountController.loginPage)
   .post(accountController.validateLogin)
 
-// router
-//   .route("/signup")
-//   .get(accountController.signUpPage)
-//   .post(accountController.signUpUser)
 router
   .route("/signup")
   .get(accountController.loginPage)
@@ -37,11 +33,5 @@ router
   .route("/changePassword")
   .get(accountController.changePasswordPage)
   .post(accountController.updatePass)
-
-// router
-//   .route("/updatepassword")
-//   .get(accountController.change)
-//   .post(accountController.updatePass)
-
 
 module.exports = router;

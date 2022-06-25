@@ -5,10 +5,6 @@ const accountRoutes = require('./account.js');
 const fetchRoutes = require('./fetch.js');
 const teamRoutes = require('./team.js');
 const fileRoutes = require('./file.js');
-
-// const favicon = require('serve-favicon');
-
-
 const validate_auth = require('../middleware/validate_auth.js')
 
 const router = express.Router();
@@ -23,7 +19,5 @@ router.use("/account", accountRoutes);
 router.use("/fetch", fetchRoutes);
 router.use("/team", teamRoutes);
 router.use("/upload", fileRoutes);
-
-// router.use(favicon('public/images/hacker.ico'));
 
 module.exports = router;
