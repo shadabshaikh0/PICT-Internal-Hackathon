@@ -15,8 +15,8 @@ router
 
 router
   .route("/signup")
-  .get(accountController.loginPage)
-  .post(accountController.validateLogin)
+  .get(accountController.signUpPage)
+  .post(accountController.signUpUser)
 
 
 router
