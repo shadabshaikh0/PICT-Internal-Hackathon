@@ -4,7 +4,6 @@ const chalk = require('chalk');
 const dotenv = require('dotenv');
 const path = require('path');
 const mongoose = require('mongoose');
-const sass = require('node-sass-middleware');
 const multer = require('multer');
 const cookieParser = require('cookie-parser')
 const fileUpload = require('express-fileupload');
@@ -45,10 +44,6 @@ app.set('views', path.join(__dirname, 'public'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
-app.use(sass({
-  src: path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public')
-}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -81,7 +76,7 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
-app.listen(process.env.PORT, () => {
+app.listen(app.get('port'), () => {
   console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env'));
   console.log('  Press CTRL-C to stop\n');
 });

@@ -1,0 +1,24 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+# In the Render dashboard: New + -> Blueprint -> connect this repo.
+# Render reads this file, creates the web service, then prompts for the
+# env vars marked `sync: false` (set them in the dashboard, not in git).
+services:
+  - type: web
+    name: pict-internal-hackathon
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      # Must be EXACTLY 32 characters (used for JWT + AES-256). Set in dashboard.
+      - key: SESSION_SECRET
+        sync: false
+      # MongoDB Atlas connection string. Set in dashboard.
+      - key: MONGODB_URI
+        sync: false
+      # Public URL of this service, e.g. https://pict-internal-hackathon.onrender.com
+      - key: BASE_URL
+        sync: false
+      # Optional feature vars — add in the dashboard only if you use them:
+      # NODEMAILER_EMAIL, NODEMAILER_PASS  (password-reset emails)
+      # AWSID, AWSSECRET                   (S3 PPT uploads)

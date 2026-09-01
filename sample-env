@@ -1,2 +1,22 @@
+# Copy this file to `.env` and fill in the values.
+
+# --- Required ---
+# MongoDB connection string (e.g. from a free MongoDB Atlas M0 cluster)
 MONGODB_URI=
-PORT=
+
+# Used for BOTH JWT signing and AES-256 encryption, so it MUST be exactly 32 characters.
+SESSION_SECRET=
+
+# Base URL of the app (used to build password-reset links).
+BASE_URL=http://localhost:8080
+
+# Port the server listens on. Hosts like Render set this automatically.
+PORT=8080
+
+# --- Optional: password-reset / confirmation emails (Gmail app password) ---
+NODEMAILER_EMAIL=
+NODEMAILER_PASS=
+
+# --- Optional: PPT file uploads to AWS S3 ---
+AWSID=
+AWSSECRET=
