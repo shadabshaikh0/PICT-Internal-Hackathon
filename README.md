@@ -1,12 +1,16 @@
 # PICT Internal Hackathon — Web App
 
+**🌐 Live app: https://pict-internal-hackathon.onrender.com**
+
 A web application to run an internal hackathon: participants sign up, log in, create or
 join teams, submit their idea/presentation, and organisers manage the event. Built with
 Node.js, Express and MongoDB.
 
-> ℹ️ The original Heroku deployment (`ihack2020.herokuapp.com`) is offline — Heroku
-> retired its free tier in November 2022. See **[Deploy for free on Render](#deploy-for-free-on-render)**
-> below to host it again at no cost.
+> ℹ️ The original Heroku deployment (`ihack2020.herokuapp.com`) is gone — Heroku retired
+> its free tier in November 2022 — so the app is now hosted **free on Render** (with a
+> free MongoDB Atlas database). See **[Deploy for free on Render](#deploy-for-free-on-render)**
+> to spin up your own copy. The live instance sleeps after ~15 min idle, so the first
+> request may take ~30–60 s to wake.
 
 ## Features
 
