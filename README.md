@@ -34,8 +34,14 @@ Node.js, Express and MongoDB.
 | [![Sign up](docs/screenshots/signup.png)](docs/screenshots/signup.png) | [![Forgot password](docs/screenshots/forgot.png)](docs/screenshots/forgot.png) |
 | Participant registration with college-ID upload | Email-based password reset |
 
-> Screenshots above are the public pages. Logged-in views (dashboard, team management,
-> PPT submission) will be added here.
+### Logged-in views
+
+| Profile | Team Profile | Team Submission |
+| :---: | :---: | :---: |
+| [![Profile](docs/screenshots/profile.png)](docs/screenshots/profile.png) | [![Team Profile](docs/screenshots/team-profile.png)](docs/screenshots/team-profile.png) | [![Team Submission](docs/screenshots/team-submission.png)](docs/screenshots/team-submission.png) |
+| Participant profile | Team members & invite code | Submit team PPT |
+
+> Contact details on the Profile screenshot are masked for privacy.
 
 ## Tech stack
 
