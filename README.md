@@ -12,6 +12,8 @@ Node.js, Express and MongoDB.
 > to spin up your own copy. The live instance sleeps after ~15 min idle, so the first
 > request may take ~30–60 s to wake.
 
+![Landing page](docs/screenshots/landing-hero.png)
+
 ## Features
 
 - **Auth** — signup, login, logout with JWT stored in an HTTP cookie
@@ -19,6 +21,21 @@ Node.js, Express and MongoDB.
 - **Teams** — create a team, join via email invite, leave/remove members
 - **Submissions** — upload a presentation (PPT) per team
 - **Dashboard** — participant dashboard and evaluation views
+
+## Screenshots
+
+| Landing | Login |
+| :---: | :---: |
+| [![Landing](docs/screenshots/landing.png)](docs/screenshots/landing.png) | [![Login](docs/screenshots/login.png)](docs/screenshots/login.png) |
+| Event timeline & problem statements | Register-ID + password sign-in |
+
+| Sign up | Forgot password |
+| :---: | :---: |
+| [![Sign up](docs/screenshots/signup.png)](docs/screenshots/signup.png) | [![Forgot password](docs/screenshots/forgot.png)](docs/screenshots/forgot.png) |
+| Participant registration with college-ID upload | Email-based password reset |
+
+> Screenshots above are the public pages. Logged-in views (dashboard, team management,
+> PPT submission) will be added here.
 
 ## Tech stack
 
